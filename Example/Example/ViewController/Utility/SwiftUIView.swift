@@ -10,11 +10,8 @@ import WWSwiftUI_MultiDatePicker
 import WWSwiftUI_Charts
 
 struct SwiftUIView: View {
-
-    private let barColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
-    private let orientation: NSLayoutConstraint.Axis = .horizontal
     
-    @StateObject private var viewModel = WWSwiftUI.ChartsViewModel<ChartsData>()
+    @StateObject private var viewModel = WWSwiftUI.BarMarkViewModel<ChartsData>()
     
     @State private var stepsData: [ChartsData] = [
         .init(label: "Sun", value: 5900),
@@ -25,11 +22,14 @@ struct SwiftUIView: View {
         .init(label: "Fri", value: 9000),
         .init(label: "Sat", value: 6200),
     ]
+    
     var body: some View {
         
-        WWSwiftUI.ChartsView(model: viewModel, barColors: barColors, orientation: orientation)
-            .onAppear { viewModel.datas = self.stepsData }
-            .padding()
+        let barColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
+        
+        WWSwiftUI.BarMarkView(model: viewModel, barColors: barColors).onAppear {
+            viewModel.data = stepsData
+        }
     }
 }
 

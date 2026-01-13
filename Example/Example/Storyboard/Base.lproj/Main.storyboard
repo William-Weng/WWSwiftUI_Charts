@@ -17,20 +17,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCB-5w-CGP">
-                                <rect key="frame" x="32" y="338.5" width="350" height="219"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="iCB-5w-CGP" secondAttribute="height" multiplier="16:10" id="4xl-X6-Wyr"/>
-                                </constraints>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vhJ-ER-ajs">
+                                <rect key="frame" x="16" y="156" width="382" height="584"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZR1-zG-ECJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="288"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58R-de-jSp">
+                                        <rect key="frame" x="0.0" y="296" width="382" height="288"/>
+                                        <color key="backgroundColor" red="0.45009386540000001" green="0.98132258650000004" blue="0.4743030667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="iCB-5w-CGP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0eO-mD-OmD"/>
-                            <constraint firstItem="iCB-5w-CGP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SqH-af-UdO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iCB-5w-CGP" secondAttribute="trailing" constant="32" id="xJp-w0-tf7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vhJ-ER-ajs" secondAttribute="trailing" constant="16" id="SKO-TI-aso"/>
+                            <constraint firstItem="vhJ-ER-ajs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="pb6-GY-Luq"/>
+                            <constraint firstItem="vhJ-ER-ajs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="wvV-Sk-MEq"/>
+                            <constraint firstItem="vhJ-ER-ajs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zeJ-cI-iLe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Charts" id="dpK-4P-TS6">
@@ -41,7 +48,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="barChartsView" destination="iCB-5w-CGP" id="ed9-sV-xjx"/>
+                        <outlet property="barChartsView" destination="ZR1-zG-ECJ" id="lyh-pc-mkt"/>
+                        <outlet property="lineChartsView" destination="58R-de-jSp" id="nOI-Vh-4g9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -70,6 +78,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

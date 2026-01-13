@@ -9,10 +9,10 @@ import UIKit
 import SwiftUI
 import WWSwiftUI_MultiDatePicker
 
-// MARK: - Charts
+// MARK: - BarMark
 public extension WWSwiftUI {
     
-    class Charts<T: WWSwiftUI.ChartsDataProtocol>: AnyObject {
+    class LineMark<T: LineMarkDataProtocol>: AnyObject {
         
         public var view: UIView { hostingController.view }
         
@@ -20,12 +20,12 @@ public extension WWSwiftUI {
         
         /// 初始化
         /// - Parameters:
-        ///   - model: ChartsViewModel<T>
+        ///   - model: LineMarkViewModel<T>
         ///   - barColors: 柱狀圖的顏色
         ///   - orientation: 方向 (水平 / 垂直)
-        public init<T>(model: ChartsViewModel<T>, barColors: [Color] = [.blue], orientation: NSLayoutConstraint.Axis) {
-            let chartsView = WWSwiftUI.ChartsView(model: model, barColors: barColors, orientation: orientation)
-            hostingController = UIHostingController.init(rootView: AnyView(chartsView))
+        public init<T>(model: LineMarkViewModel<T>, unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
+            let chartsView = WWSwiftUI.LineMarkView(model: model, unit: unit, orientation: orientation)
+            hostingController = UIHostingController(rootView: AnyView(chartsView))
         }
         
         deinit {
@@ -37,7 +37,7 @@ public extension WWSwiftUI {
 }
 
 // MARK: - 公開函式
-public extension WWSwiftUI.Charts {
+public extension WWSwiftUI.LineMark {
     
     /// [移動到UIViewController上](https://www.keaura.com/blog/a-multi-date-picker-for-swiftui)
     /// - Parameters:

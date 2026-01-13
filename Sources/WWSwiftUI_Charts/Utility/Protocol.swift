@@ -13,11 +13,30 @@ import WWSwiftUI_MultiDatePicker
 public extension WWSwiftUI {
     
     protocol ChartsDataProtocol: Identifiable {
+        var id: UUID { get }            // 唯一識別碼
+    }
+    
+    protocol BarMarkValueProtocol: ChartsDataProtocol {
         
         associatedtype Value: Plottable
         
-        var id: UUID { get }            // 唯一識別碼
         var label: String { get set }   // 標題文字
         var value: Value { get set }    // 數值
+    }
+    
+    protocol LineMarkValueProtocol: ChartsDataProtocol {
+        
+        associatedtype Value: Plottable
+        
+        var date: Date { get set }      // 日期
+        var value: Value { get set }    // 數值
+    }
+    
+    protocol LineMarkDataProtocol: ChartsDataProtocol {
+        
+        associatedtype Data: LineMarkValueProtocol
+
+        var label: String { get set }   // 標題文字
+        var data: [Data] { get set }    // 數值
     }
 }
