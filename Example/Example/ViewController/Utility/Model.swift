@@ -9,7 +9,7 @@ import Foundation
 import WWSwiftUI_MultiDatePicker
 import WWSwiftUI_Charts
 
-class ChartsData: WWSwiftUI.BarMarkValueProtocol {
+final class ChartsData: WWSwiftUI.BarMarkValueProtocol {
     
     typealias Value = Int
 
@@ -23,7 +23,7 @@ class ChartsData: WWSwiftUI.BarMarkValueProtocol {
     }
 }
 
-class LineChartsValue: WWSwiftUI.LineMarkValueProtocol {
+final class LineChartsValue: WWSwiftUI.LineMarkValueProtocol {
     
     typealias Value = Int
     
@@ -37,7 +37,7 @@ class LineChartsValue: WWSwiftUI.LineMarkValueProtocol {
     }
 }
 
-class LineChartsData: WWSwiftUI.LineMarkDataProtocol {
+final class LineChartsData: WWSwiftUI.LineMarkDataProtocol {
     
     typealias Data = LineChartsValue
     

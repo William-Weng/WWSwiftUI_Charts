@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		811E0FCC2F163F86000E7908 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 811E0FCB2F163F86000E7908 /* WWSwiftUI_Charts */; };
+		811E0FCF2F164396000E7908 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 811E0FCE2F164396000E7908 /* WWSwiftUI_Charts */; };
+		811E0FD52F1648C3000E7908 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 811E0FD42F1648C3000E7908 /* WWSwiftUI_Charts */; };
+		811E0FD82F164FC6000E7908 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 811E0FD72F164FC6000E7908 /* WWSwiftUI_Charts */; };
 		817F54AE2F15E2AD006BBADB /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 817F54AD2F15E2AD006BBADB /* WWSwiftUI_Charts */; };
 		81F6FE822F148FFB0018BDCC /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 81F6FE812F148FFB0018BDCC /* WWSwiftUI_Charts */; };
 /* End PBXBuildFile section */
@@ -42,7 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				811E0FCC2F163F86000E7908 /* WWSwiftUI_Charts in Frameworks */,
+				811E0FCF2F164396000E7908 /* WWSwiftUI_Charts in Frameworks */,
+				811E0FD52F1648C3000E7908 /* WWSwiftUI_Charts in Frameworks */,
+				811E0FD82F164FC6000E7908 /* WWSwiftUI_Charts in Frameworks */,
 				81F6FE822F148FFB0018BDCC /* WWSwiftUI_Charts in Frameworks */,
 				817F54AE2F15E2AD006BBADB /* WWSwiftUI_Charts in Frameworks */,
 			);
@@ -89,7 +93,9 @@
 			packageProductDependencies = (
 				81F6FE812F148FFB0018BDCC /* WWSwiftUI_Charts */,
 				817F54AD2F15E2AD006BBADB /* WWSwiftUI_Charts */,
-				811E0FCB2F163F86000E7908 /* WWSwiftUI_Charts */,
+				811E0FCE2F164396000E7908 /* WWSwiftUI_Charts */,
+				811E0FD42F1648C3000E7908 /* WWSwiftUI_Charts */,
+				811E0FD72F164FC6000E7908 /* WWSwiftUI_Charts */,
 			);
 			productName = Example;
 			productReference = 817EE1FE2EB1FA050036B57C /* Example.app */;
@@ -120,7 +126,7 @@
 			mainGroup = 817EE1F52EB1FA050036B57C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				811E0FCA2F163F86000E7908 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */,
+				811E0FD62F164FC6000E7908 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 817EE1FF2EB1FA050036B57C /* Products */;
@@ -364,20 +370,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		811E0FCA2F163F86000E7908 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */ = {
+		811E0FD62F164FC6000E7908 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWSwiftUI_Charts";
 			requirement = {
-				kind = upToNextMinorVersion;
+				kind = upToNextMajorVersion;
 				minimumVersion = 1.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		811E0FCB2F163F86000E7908 /* WWSwiftUI_Charts */ = {
+		811E0FCE2F164396000E7908 /* WWSwiftUI_Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 811E0FCA2F163F86000E7908 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */;
+			productName = WWSwiftUI_Charts;
+		};
+		811E0FD42F1648C3000E7908 /* WWSwiftUI_Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WWSwiftUI_Charts;
+		};
+		811E0FD72F164FC6000E7908 /* WWSwiftUI_Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 811E0FD62F164FC6000E7908 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */;
 			productName = WWSwiftUI_Charts;
 		};
 		817F54AD2F15E2AD006BBADB /* WWSwiftUI_Charts */ = {

@@ -35,8 +35,7 @@ public extension WWSwiftUI {
             
             Chart(model.data) { item in
                 let index = model.data.firstIndex(where: { $0.id == item.id }) ?? 0
-                barMarkMaker(item: item, orientation: orientation)
-                .foregroundStyle(barColors[index % barColors.count])
+                barMarkMaker(item: item, orientation: orientation).foregroundStyle(barColors[index % barColors.count])
             }
             .background(.clear)
             .padding()
@@ -53,6 +52,7 @@ private extension WWSwiftUI.BarMarkView {
     ///   - orientation: 方向 (水平 / 垂直)
     /// - Returns: BarMark
     func barMarkMaker<T: WWSwiftUI.BarMarkValueProtocol>(item: T, orientation: NSLayoutConstraint.Axis) -> BarMark {
+        
         switch orientation {
         case .horizontal: return BarMark(x: .value("Value", item.value), y: .value("Label", item.label))
         case .vertical: return BarMark(x: .value("Label", item.label), y: .value("Value", item.value))

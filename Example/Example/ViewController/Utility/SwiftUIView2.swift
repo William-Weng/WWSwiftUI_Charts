@@ -18,7 +18,7 @@ struct SwiftUIView2: View {
     
     var body: some View {
         
-        WWSwiftUI.LineMarkView<LineChartsData>(model: viewModel, orientation: .vertical).onAppear {
+        WWSwiftUI.LineMarkView<LineChartsData>(model: viewModel).onAppear {
             
             let date1: Date = .now.addingTimeInterval(-86400 * 3)
             let date2: Date = .now.addingTimeInterval(-86400 * 2)
@@ -38,10 +38,10 @@ struct SwiftUIView2: View {
                 .init(date: date3, value: 18),
                 .init(date: date4, value: 35)
             ]
-
+            
             viewModel.data = [
-                .init(label: "台北", data: taipeiData),
-                .init(label: "香港", data: hkData)
+                .init(label: "Taipei", data: taipeiData),
+                .init(label: "Hong Kong", data: hkData)
             ]
         }
     }
