@@ -40,12 +40,12 @@ private extension ViewController {
         let barColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
         
         barViewModel.data = [.init(label: "Sun", value: 5900)]
-        barCharts = .init(model: barViewModel, barColors: barColors)
+        barCharts = .init(model: barViewModel, barColors: barColors, useAnnotation: true)
         barCharts.move(toParent: self, on: barChartsView)
     }
     
     func initLineChart() {
-        lineCharts = .init(model: lineViewModel)
+        lineCharts = .init(model: lineViewModel, useAnnotation: true)
         lineViewModel.data = [.init(label: "台北", data: [.init(date: .now, value: 100)])]
         lineCharts.move(toParent: self, on: lineChartsView)
     }

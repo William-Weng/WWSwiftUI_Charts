@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  SwiftUIView2.swift
 //  Example
 //
-//  Created by iOS on 2026/1/13.
+//  Created by William.Weng on 2026/1/13.
 //
 
 import SwiftUI

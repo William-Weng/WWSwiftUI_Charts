@@ -5,20 +5,20 @@
 - [Transfer SwiftUI's Charts to UIKit.](https://developer.apple.com/documentation/Charts)
 - [將SwiftUI的圖表功能轉給UIKit使用。](https://www.appcoda.com.tw/swiftui-line-charts/)
 
-![](https://github.com/user-attachments/assets/d71e3025-adfc-4c49-ae44-27ce2ef9882c)
+![](https://github.com/user-attachments/assets/ab515ba4-0880-4e7e-a1a6-6700cb9e432d)
 
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.1.2"))
+    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.1.3"))
 ]
 ```
 
 ### 可用函式 (Function)
 |函式|功能|
 |-|-|
-|BarMark(model:barWidth:barColors:orientation:)|初始化 (柱狀圖)|
-|LineMark(model:lineWidth:lineColors:unit:orientation:)|初始化 (折線圖)|
+|BarMark(model:barWidth:barColors:useAnnotation:orientation:)|初始化 (柱狀圖)|
+|LineMark(model:lineWidth:lineColors:useAnnotation:unit:orientation:)|初始化 (折線圖)|
 
 ### Example (UIKit)
 ```swift
@@ -57,12 +57,12 @@ private extension ViewController {
         let barColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
         
         barViewModel.data = [.init(label: "Sun", value: 5900)]
-        barCharts = .init(model: barViewModel, barColors: barColors)
+        barCharts = .init(model: barViewModel, barColors: barColors, useAnnotation: true)
         barCharts.move(toParent: self, on: barChartsView)
     }
     
     func initLineChart() {
-        lineCharts = .init(model: lineViewModel)
+        lineCharts = .init(model: lineViewModel, useAnnotation: true)
         lineViewModel.data = [.init(label: "台北", data: [.init(date: .now, value: 100)])]
         lineCharts.move(toParent: self, on: lineChartsView)
     }

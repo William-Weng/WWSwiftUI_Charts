@@ -20,18 +20,21 @@ public extension WWSwiftUI {
         private let orientation: NSLayoutConstraint.Axis
         private let barWidth: MarkDimension
         private let barColors: [Color]
-
-        /// 初始化
+        private let useAnnotation: Bool
+        
+        /// [初始化設定](https://www.youtube.com/watch?v=uloAs9tQIcA)
         /// - Parameters:
         ///   - model: ChartsViewModel<T>
         ///   - barWidth: 柱體寬度
         ///   - barColors: 柱狀圖的數值顏色
+        ///   - useAnnotation: 是否顯示數值文字
         ///   - orientation: 方向 (水平 / 垂直)
-        public init(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [.blue], orientation: NSLayoutConstraint.Axis = .vertical) {
+        public init(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [.blue], useAnnotation: Bool = false, orientation: NSLayoutConstraint.Axis = .vertical) {
             self.model = model
             self.barWidth = barWidth
             self.barColors = barColors
             self.orientation = orientation
+            self.useAnnotation = useAnnotation
         }
         
         public var body: some View {
@@ -41,6 +44,13 @@ public extension WWSwiftUI {
                 let index = model.data.firstIndex(where: { $0.id == item.id }) ?? 0
                 barMarkMaker(item: item, orientation: orientation)
                     .foregroundStyle(barColors[index % barColors.count])
+                    ._if(useAnnotation) {
+                        $0.annotation(position: .automatic) {
+                            Text("\(item.value)")
+                                .font(.caption2)
+                                .foregroundStyle(.primary)
+                        }
+                    }
             }
             .background(.clear)
             .padding()

@@ -18,15 +18,16 @@ public extension WWSwiftUI {
         
         public var view: UIView { hostingController.view }
         
-        /// 初始化
+        /// 初始化設定
         /// - Parameters:
         ///   - model: LineMarkViewModel<T>
         ///   - lineWidth: 線寬
         ///   - lineColors: 線段顏色
+        ///   - useAnnotation: 是否顯示數值文字
         ///   - unit: 日期單位
         ///   - orientation: 方向 (水平 / 垂直)
-        public init<T>(model: LineMarkViewModel<T>, lineWidth: CGFloat = 1, lineColors: [Color] = [], unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
-            let rootView = WWSwiftUI.LineMarkView(model: model, lineWidth: lineWidth, lineColors: lineColors, unit: unit, orientation: orientation)
+        public init<T>(model: LineMarkViewModel<T>, lineWidth: CGFloat = 1, lineColors: [Color] = [], useAnnotation: Bool = false, unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
+            let rootView = WWSwiftUI.LineMarkView(model: model, lineWidth: lineWidth, lineColors: lineColors, useAnnotation: useAnnotation, unit: unit, orientation: orientation)
             hostingController = UIHostingController(rootView: AnyView(rootView))
         }
         

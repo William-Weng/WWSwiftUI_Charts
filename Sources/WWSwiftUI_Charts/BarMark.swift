@@ -19,14 +19,15 @@ public extension WWSwiftUI {
         
         public var view: UIView { hostingController.view }
         
-        /// 初始化
+        /// 初始化設定
         /// - Parameters:
         ///   - model: BarMarkViewModel<T>
         ///   - barWidth: 柱體寬度
         ///   - barColors: 柱狀圖的顏色
+        ///   - useAnnotation: 是否顯示數值文字
         ///   - orientation: 方向 (水平 / 垂直)
-        public init<T>(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [.blue], orientation: NSLayoutConstraint.Axis = .vertical) {
-            let rootView = WWSwiftUI.BarMarkView(model: model, barWidth: barWidth, barColors: barColors, orientation: orientation)
+        public init<T>(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [.blue], useAnnotation: Bool = false, orientation: NSLayoutConstraint.Axis = .vertical) {
+            let rootView = WWSwiftUI.BarMarkView(model: model, barWidth: barWidth, barColors: barColors, useAnnotation: useAnnotation, orientation: orientation)
             hostingController = UIHostingController(rootView: AnyView(rootView))
         }
         
