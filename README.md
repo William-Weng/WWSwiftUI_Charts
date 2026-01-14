@@ -63,7 +63,7 @@ private extension ViewController {
     
     func initLineChart() {
         lineCharts = .init(model: lineViewModel, useAnnotation: true)
-        lineViewModel.data = [.init(label: "台北", data: [.init(date: .now, value: 100)])]
+        lineViewModel.data = [.init(label: "Taipei", data: [.init(date: .now, value: 100)])]
         lineCharts.move(toParent: self, on: lineChartsView)
     }
     

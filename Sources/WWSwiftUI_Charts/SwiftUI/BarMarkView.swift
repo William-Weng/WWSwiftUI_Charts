@@ -17,6 +17,7 @@ public extension WWSwiftUI {
         
         @ObservedObject var model: BarMarkViewModel<T>
         
+        private let fieldKey = (label: "Label", value: "Value")
         private let orientation: NSLayoutConstraint.Axis
         private let barWidth: MarkDimension
         private let barColors: [Color]
@@ -42,6 +43,7 @@ public extension WWSwiftUI {
             Chart(model.data) { item in
                 
                 let index = model.data.firstIndex(where: { $0.id == item.id }) ?? 0
+                
                 barMarkMaker(item: item, orientation: orientation)
                     .foregroundStyle(barColors[index % barColors.count])
                     ._if(useAnnotation) {
@@ -69,8 +71,8 @@ private extension WWSwiftUI.BarMarkView {
     func barMarkMaker<T: WWSwiftUI.BarMarkValueProtocol>(item: T, orientation: NSLayoutConstraint.Axis) -> BarMark {
         
         switch orientation {
-        case .horizontal: return BarMark(x: .value("Value", item.value), y: .value("Label", item.label), width: barWidth)
-        case .vertical: return BarMark(x: .value("Label", item.label), y: .value("Value", item.value), width: barWidth)
+        case .horizontal: return BarMark(x: .value(fieldKey.value, item.value), y: .value(fieldKey.label, item.label), width: barWidth)
+        case .vertical: return BarMark(x: .value(fieldKey.label, item.label), y: .value(fieldKey.value, item.value), width: barWidth)
         }
     }
 }
