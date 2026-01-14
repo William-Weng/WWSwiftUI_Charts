@@ -9,15 +9,15 @@ import UIKit
 import SwiftUI
 import WWSwiftUI_MultiDatePicker
 
-// MARK: - BarMark
+// MARK: - 柱狀圖
 public extension WWSwiftUI {
     
     class BarMark<T: BarMarkValueProtocol>: AnyObject {
-        
-        public var view: UIView { hostingController.view }
-        
+                
         private let hostingController: UIHostingController<AnyView>
         
+        public var view: UIView { hostingController.view }
+
         /// 初始化
         /// - Parameters:
         ///   - model: BarMarkViewModel<T>

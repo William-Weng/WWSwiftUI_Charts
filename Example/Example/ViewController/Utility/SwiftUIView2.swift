@@ -17,8 +17,10 @@ struct SwiftUIView2: View {
     @StateObject private var viewModel = WWSwiftUI.LineMarkViewModel<LineChartsData>()
     
     var body: some View {
+    
+        let lineColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
         
-        WWSwiftUI.LineMarkView<LineChartsData>(model: viewModel).onAppear {
+        WWSwiftUI.LineMarkView<LineChartsData>(model: viewModel, lineWidth: 3.0, lineColors: lineColors).onAppear {
             
             let date1: Date = .now.addingTimeInterval(-86400 * 3)
             let date2: Date = .now.addingTimeInterval(-86400 * 2)

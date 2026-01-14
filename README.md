@@ -10,15 +10,15 @@
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.1.0"))
+    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.1.1"))
 ]
 ```
 
 ### 可用函式 (Function)
 |函式|功能|
 |-|-|
-|BarMark(model:barColors:orientation:)|初始化BarMark|
-|LineMark(model:unit:orientation:)|初始化LineMark|
+|BarMark(model:barWidth:barColors:orientation:)|初始化 (柱狀圖)|
+|LineMark(model:lineWidth:lineColors:unit:orientation:)|初始化 (折線圖)|
 
 ### Example (UIKit)
 ```swift
@@ -113,10 +113,6 @@ private extension ViewController {
 
 ### Example (SwiftUI)
 ```swift
-import SwiftUI
-import WWSwiftUI_MultiDatePicker
-import WWSwiftUI_Charts
-
 struct SwiftUIView: View {
     
     @StateObject private var viewModel = WWSwiftUI.BarMarkViewModel<ChartsData>()
@@ -135,9 +131,9 @@ struct SwiftUIView: View {
         
         let barColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
         
-        WWSwiftUI.BarMarkView(model: viewModel, barColors: barColors)
-            .onAppear { viewModel.data = stepsData }
-            .padding()
+        WWSwiftUI.BarMarkView(model: viewModel, barWidth: .ratio(0.5), barColors: barColors).onAppear {
+            viewModel.data = stepsData
+        }
     }
 }
 
@@ -160,8 +156,10 @@ struct SwiftUIView2: View {
     @StateObject private var viewModel = WWSwiftUI.LineMarkViewModel<LineChartsData>()
     
     var body: some View {
+    
+        let lineColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
         
-        WWSwiftUI.LineMarkView<LineChartsData>(model: viewModel).onAppear {
+        WWSwiftUI.LineMarkView<LineChartsData>(model: viewModel, lineWidth: 3.0, lineColors: lineColors).onAppear {
             
             let date1: Date = .now.addingTimeInterval(-86400 * 3)
             let date2: Date = .now.addingTimeInterval(-86400 * 2)
@@ -181,7 +179,7 @@ struct SwiftUIView2: View {
                 .init(date: date3, value: 18),
                 .init(date: date4, value: 35)
             ]
-
+            
             viewModel.data = [
                 .init(label: "Taipei", data: taipeiData),
                 .init(label: "Hong Kong", data: hkData)

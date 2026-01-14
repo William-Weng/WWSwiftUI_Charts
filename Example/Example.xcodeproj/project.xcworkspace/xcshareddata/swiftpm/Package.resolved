@@ -1,15 +1,6 @@
 {
-  "originHash" : "953aefffc72bd937978f7edd8c99090aec39bc10231f0f1d09b4d4e63c511459",
+  "originHash" : "6d5a3b0473f76222ed1bcb6399f10b5b740575617bd1bc98c622f8f1bda8bb11",
   "pins" : [
-    {
-      "identity" : "wwswiftui_charts",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/William-Weng/WWSwiftUI_Charts",
-      "state" : {
-        "revision" : "426240f0dda12e397f7de60b7b32e0c77e076225",
-        "version" : "1.1.0"
-      }
-    },
     {
       "identity" : "wwswiftui_multidatepicker",
       "kind" : "remoteSourceControl",

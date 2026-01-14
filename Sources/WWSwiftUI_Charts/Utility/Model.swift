@@ -2,7 +2,7 @@
 //  File.swift
 //  WWSwiftUI_Charts
 //
-//  Created by iOS on 2026/1/12.
+//  Created by William.Weng on 2026/1/12.
 //
 
 import Combine

@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 import WWSwiftUI_MultiDatePicker
 
-// MARK: - BarMark
+// MARK: - 折線圖
 public extension WWSwiftUI {
     
     class LineMark<T: LineMarkDataProtocol>: AnyObject {

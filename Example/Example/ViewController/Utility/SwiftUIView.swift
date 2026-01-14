@@ -27,7 +27,7 @@ struct SwiftUIView: View {
         
         let barColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
         
-        WWSwiftUI.BarMarkView(model: viewModel, barColors: barColors).onAppear {
+        WWSwiftUI.BarMarkView(model: viewModel, barWidth: .ratio(0.5), barColors: barColors).onAppear {
             viewModel.data = stepsData
         }
     }

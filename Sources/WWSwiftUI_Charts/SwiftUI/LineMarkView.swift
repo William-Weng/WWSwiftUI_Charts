@@ -9,29 +9,50 @@ import SwiftUI
 import Charts
 import WWSwiftUI_MultiDatePicker
 
-// MARK: - ChartsView (SwiftUI)
+// MARK: - 折線圖 (SwiftUI)
 public extension WWSwiftUI {
     
     struct LineMarkView<T: WWSwiftUI.LineMarkDataProtocol>: View {
         
         private let orientation: NSLayoutConstraint.Axis
         private let unit: Calendar.Component
-        
+        private let lineWidth: CGFloat
+        private let lineColors: [Color]
+                
         @ObservedObject var model: LineMarkViewModel<T>
         
-        public init(model: LineMarkViewModel<T>, unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
+        /// 初始化設定
+        /// - Parameters:
+        ///   - model: LineMarkViewModel<T>
+        ///   - lineWidth: 線寬
+        ///   - lineColors: 線段顏色
+        ///   - unit: 時間單位
+        ///   - orientation: 顯示方向 (橫 / 直)
+        public init(model: LineMarkViewModel<T>, lineWidth: CGFloat = 1, lineColors: [Color] = [], unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
             self.model = model
             self.orientation = orientation
             self.unit = unit
+            self.lineWidth = lineWidth
+            self.lineColors = lineColors
         }
         
         public var body: some View {
-            Chart(model.data, id: \.label) { series in
+                        
+            Chart(model.data, id: \.id) { series in
+                                
                 ForEach(series.data) { item in
+                    
+                    let index = model.data.firstIndex(where: { $0.id == item.id }) ?? 0
+                    
                     lineMarkMaker(item: item, orientation: orientation, unit: unit)
-                    .foregroundStyle(by: .value("標題", series.label))
-                    .symbol(by: .value("標題", series.label))
+                        .lineStyle(StrokeStyle(lineWidth: lineWidth))
+                        .foregroundStyle(by: .value("Label", series.label))
+                        .symbol(by: .value("Label", series.label))
                 }
+            }
+            .if(!lineColors.isEmpty) {
+                $0.chartForegroundStyleScale(range: lineColors)
+                  .chartLegend(.visible)
             }
             .background(.clear)
             .padding()
