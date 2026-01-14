@@ -7,25 +7,27 @@
 
 import UIKit
 import SwiftUI
+import Charts
 import WWSwiftUI_MultiDatePicker
 
 // MARK: - 柱狀圖
 public extension WWSwiftUI {
     
-    class BarMark<T: BarMarkValueProtocol>: AnyObject {
+    class BarMark<T: BarMarkValueProtocol>: WWSwiftUI.`Protocol` {
                 
-        private let hostingController: UIHostingController<AnyView>
+        public let hostingController: UIHostingController<AnyView>
         
         public var view: UIView { hostingController.view }
-
+        
         /// 初始化
         /// - Parameters:
         ///   - model: BarMarkViewModel<T>
+        ///   - barWidth: 柱體寬度
         ///   - barColors: 柱狀圖的顏色
         ///   - orientation: 方向 (水平 / 垂直)
-        public init<T>(model: BarMarkViewModel<T>, barColors: [Color] = [.blue], orientation: NSLayoutConstraint.Axis = .vertical) {
-            let chartsView = WWSwiftUI.BarMarkView(model: model, barColors: barColors, orientation: orientation)
-            hostingController = UIHostingController(rootView: AnyView(chartsView))
+        public init<T>(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [.blue], orientation: NSLayoutConstraint.Axis = .vertical) {
+            let rootView = WWSwiftUI.BarMarkView(model: model, barWidth: barWidth, barColors: barColors, orientation: orientation)
+            hostingController = UIHostingController(rootView: AnyView(rootView))
         }
         
         deinit {
@@ -33,21 +35,5 @@ public extension WWSwiftUI {
             hostingController.view.removeFromSuperview()
             hostingController.removeFromParent()
         }
-    }
-}
-
-// MARK: - 公開函式
-public extension WWSwiftUI.BarMark {
-    
-    /// [移動到UIViewController上](https://www.keaura.com/blog/a-multi-date-picker-for-swiftui)
-    /// - Parameters:
-    ///   - parent: UIViewController
-    ///   - otherView: UIView?
-    func move(toParent parent: UIViewController, on otherView: UIView? = .none) {
-        
-        parent.addChild(hostingController)
-        hostingController.didMove(toParent: parent)
-        
-        if let otherView = otherView { hostingController.view._autolayout(on: otherView) }
     }
 }

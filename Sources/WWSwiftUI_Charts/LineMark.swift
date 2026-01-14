@@ -12,20 +12,22 @@ import WWSwiftUI_MultiDatePicker
 // MARK: - 折線圖
 public extension WWSwiftUI {
     
-    class LineMark<T: LineMarkDataProtocol>: AnyObject {
+    class LineMark<T: LineMarkDataProtocol>: WWSwiftUI.`Protocol` {
+        
+        public let hostingController: UIHostingController<AnyView>
         
         public var view: UIView { hostingController.view }
-        
-        private let hostingController: UIHostingController<AnyView>
         
         /// 初始化
         /// - Parameters:
         ///   - model: LineMarkViewModel<T>
-        ///   - barColors: 柱狀圖的顏色
+        ///   - lineWidth: 線寬
+        ///   - lineColors: 線段顏色
+        ///   - unit: 日期單位
         ///   - orientation: 方向 (水平 / 垂直)
-        public init<T>(model: LineMarkViewModel<T>, unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
-            let chartsView = WWSwiftUI.LineMarkView(model: model, unit: unit, orientation: orientation)
-            hostingController = UIHostingController(rootView: AnyView(chartsView))
+        public init<T>(model: LineMarkViewModel<T>, lineWidth: CGFloat = 1, lineColors: [Color] = [], unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
+            let rootView = WWSwiftUI.LineMarkView(model: model, lineWidth: lineWidth, lineColors: lineColors, unit: unit, orientation: orientation)
+            hostingController = UIHostingController(rootView: AnyView(rootView))
         }
         
         deinit {
@@ -36,18 +38,3 @@ public extension WWSwiftUI {
     }
 }
 
-// MARK: - 公開函式
-public extension WWSwiftUI.LineMark {
-    
-    /// [移動到UIViewController上](https://www.keaura.com/blog/a-multi-date-picker-for-swiftui)
-    /// - Parameters:
-    ///   - parent: UIViewController
-    ///   - otherView: UIView?
-    func move(toParent parent: UIViewController, on otherView: UIView? = .none) {
-        
-        parent.addChild(hostingController)
-        hostingController.didMove(toParent: parent)
-        
-        if let otherView = otherView { hostingController.view._autolayout(on: otherView) }
-    }
-}

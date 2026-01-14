@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "WWSwiftUI_Charts", targets: ["WWSwiftUI_Charts"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/William-Weng/WWSwiftUI_MultiDatePicker", from: "1.1.7")
+        .package(url: "https://github.com/William-Weng/WWSwiftUI_MultiDatePicker", from: "1.2.0")
     ],
     targets: [
         .target(name: "WWSwiftUI_Charts", dependencies: ["WWSwiftUI_MultiDatePicker"], resources: [.copy("Privacy")]),
