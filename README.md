@@ -24,9 +24,9 @@ dependencies: [
 ### 可用函式 (Delegate)
 |函式|功能|
 |-|-|
-|barMark(_proxy:didSelected:)|點擊圖表的反應 (柱狀圖)|
-|lineMark(_proxy:didSelected:)|點擊圖表的反應 (折線圖)|
-|pointMark(_proxy:didSelected:)|點擊圖表的反應 (散點圖)|
+|barMark(_:proxy:didSelected:)|點擊圖表的反應 (柱狀圖)|
+|lineMark(_:proxy:didSelected:)|點擊圖表的反應 (折線圖)|
+|pointMark(_:proxy:didSelected:)|點擊圖表的反應 (散點圖)|
 
 ### Example (UIKit)
 ```swift
@@ -259,24 +259,6 @@ struct SwiftUIView2: View {
 import SwiftUI
 import WWSwiftUI_MultiDatePicker
 import WWSwiftUI_Charts
-
-final class PointChartsData: WWSwiftUI.PointMarkValueProtocol {
-    
-    typealias ValueX = Int
-    typealias ValueY = Int
-    
-    let id: UUID = UUID()
-
-    var label: String
-    var xValue: ValueX
-    var yValue: ValueY
-    
-    init(label: String, xValue: ValueX, yValue: ValueY) {
-        self.label = label
-        self.xValue = xValue
-        self.yValue = yValue
-    }
-}
 
 struct SwiftUIView3: View {
         
