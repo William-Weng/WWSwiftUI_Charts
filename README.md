@@ -10,7 +10,7 @@
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.1.4"))
+    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.2.0"))
 ]
 ```
 
@@ -19,12 +19,14 @@ dependencies: [
 |-|-|
 |BarMark(model:barWidth:barColors:useAnnotation:orientation:)|初始化 (柱狀圖)|
 |LineMark(model:lineWidth:lineColors:useAnnotation:unit:orientation:)|初始化 (折線圖)|
+|PointMark(model:symbolSize:useAnnotation:)|初始化 (散點圖)|
 
 ### 可用函式 (Delegate)
 |函式|功能|
 |-|-|
-|barMark(_proxy:didSelected:)|點擊圖表的反應|
-|lineMark(_proxy:didSelected:)|點擊圖表的反應|
+|barMark(_proxy:didSelected:)|點擊圖表的反應 (柱狀圖)|
+|lineMark(_proxy:didSelected:)|點擊圖表的反應 (折線圖)|
+|pointMark(_proxy:didSelected:)|點擊圖表的反應 (散點圖)|
 
 ### Example (UIKit)
 ```swift
@@ -38,22 +40,27 @@ final class ViewController: UIViewController {
     
     @IBOutlet weak var barChartsView: UIView!
     @IBOutlet weak var lineChartsView: UIView!
-    
-    private var barCharts: WWSwiftUI.BarMark<ChartsData>!
+    @IBOutlet weak var pointChartsView: UIView!
+
+    private var barCharts: WWSwiftUI.BarMark<BarChartsData>!
     private var lineCharts: WWSwiftUI.LineMark<LineChartsData>!
-    
-    private var barViewModel: WWSwiftUI.BarMarkViewModel<ChartsData> = .init()
+    private var pointCharts: WWSwiftUI.PointMark<PointChartsData>!
+
+    private var barViewModel: WWSwiftUI.BarMarkViewModel<BarChartsData> = .init()
     private var lineViewModel: WWSwiftUI.LineMarkViewModel<LineChartsData> = .init()
+    private var pointViewModel: WWSwiftUI.PointMarkViewModel<PointChartsData> = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initBarChart()
         initLineChart()
+        initPointChart()
     }
     
     @IBAction func valueSetting(_ sender: UIBarButtonItem) {
         barChartSetting()
         lineChartSetting()
+        pointChartSetting()
     }
 }
 
@@ -68,6 +75,14 @@ extension ViewController: WWSwiftUI.BarMarkDelegate {
 extension ViewController: WWSwiftUI.LineMarkDelegate {
     
     func lineMark<T: WWSwiftUI.LineMarkDataProtocol>(_ lineMark: WWSwiftUI.LineMark<T>, proxy: ChartProxy, didSelected location: CGPoint) {
+        guard let item = proxy.value(at: location, as: (Int, Int).self) else { return }
+        print(item)
+    }
+}
+
+extension ViewController: WWSwiftUI.PointMarkDelegate {
+    
+    func pointMark<T: WWSwiftUI.PointMarkValueProtocol>(_ pointMark: WWSwiftUI.PointMark<T>, proxy: ChartProxy, didSelected location: CGPoint) {
         guard let item = proxy.value(at: location, as: (Date, Int).self) else { return }
         print(item)
     }
@@ -90,9 +105,15 @@ private extension ViewController {
         lineCharts.move(toParent: self, on: lineChartsView)
     }
     
+    func initPointChart() {
+        pointCharts = .init(model: pointViewModel, useAnnotation: true)
+        pointViewModel.data = [.init(label: "Taipei", xValue: 16, yValue: 26)]
+        pointCharts.move(toParent: self, on: pointChartsView)
+    }
+    
     func barChartSetting() {
-               
-        let stepsData: [ChartsData] = [
+        
+        let stepsData: [BarChartsData] = [
             .init(label: "Sun", value: 5900),
             .init(label: "Mon", value: 6500),
             .init(label: "Tue", value: 7200),
@@ -134,6 +155,19 @@ private extension ViewController {
         
         lineCharts.delegate = self
     }
+    
+    func pointChartSetting() {
+        
+        pointViewModel.data = [
+            .init(label: "Taipei", xValue: 16, yValue: 26),
+            .init(label: "Taipei", xValue: 23, yValue: 32),
+            .init(label: "Taipei", xValue: 15, yValue: 16),
+            .init(label: "Hong Kong", xValue: 22, yValue: 25),
+            .init(label: "Hong Kong", xValue: 10, yValue: 5),
+        ]
+        
+        pointCharts.delegate = self
+    }
 }
 ```
 
@@ -143,7 +177,7 @@ struct SwiftUIView: View {
     
     @StateObject private var viewModel = WWSwiftUI.BarMarkViewModel<ChartsData>()
     
-    @State private var stepsData: [ChartsData] = [
+    @State private var stepsData: [BarChartsData] = [
         .init(label: "Sun", value: 5900),
         .init(label: "Mon", value: 6500),
         .init(label: "Tue", value: 7200),
@@ -216,5 +250,55 @@ struct SwiftUIView2: View {
 
 #Preview {
     SwiftUIView2()
+}
+```
+
+### Example (SwiftUI)
+
+```swift
+import SwiftUI
+import WWSwiftUI_MultiDatePicker
+import WWSwiftUI_Charts
+
+final class PointChartsData: WWSwiftUI.PointMarkValueProtocol {
+    
+    typealias ValueX = Int
+    typealias ValueY = Int
+    
+    let id: UUID = UUID()
+
+    var label: String
+    var xValue: ValueX
+    var yValue: ValueY
+    
+    init(label: String, xValue: ValueX, yValue: ValueY) {
+        self.label = label
+        self.xValue = xValue
+        self.yValue = yValue
+    }
+}
+
+struct SwiftUIView3: View {
+        
+    @StateObject private var viewModel = WWSwiftUI.PointMarkViewModel<PointChartsData>()
+    
+    @State private var pointsData: [PointChartsData] = [
+        .init(label: "Taipei", xValue: 16, yValue: 26),
+        .init(label: "Taipei", xValue: 23, yValue: 32),
+        .init(label: "Taipei", xValue: 15, yValue: 16),
+        .init(label: "Hong Kong", xValue: 22, yValue: 25),
+        .init(label: "Hong Kong", xValue: 10, yValue: 5),
+    ]
+    
+    var body: some View {
+        WWSwiftUI.PointMarkView(model: viewModel)
+            .onAppear() {
+                viewModel.data = pointsData
+            }
+    }
+}
+
+#Preview {
+    SwiftUIView3()
 }
 ```

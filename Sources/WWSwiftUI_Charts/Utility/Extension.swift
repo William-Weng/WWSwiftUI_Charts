@@ -17,14 +17,31 @@ extension View {
     func _chartOverlayOnTap(action: @escaping (ChartProxy, CGPoint) -> Void) -> some View {
         
         chartOverlay { proxy in
-            
             GeometryReader { geometry in
                 Rectangle()
                     .fill(.clear)
                     .contentShape(Rectangle())
-                    .contentShape(Rectangle())
                     .onTapGesture { location in action(proxy, location) }
             }
+        }
+    }
+}
+
+// MARK: - ChartContent
+extension ChartContent {
+    
+    /// 圖表註解
+    /// - Parameters:
+    ///   - value: 數值
+    ///   - font: 字型
+    ///   - foregroundStyle: 文字類型
+    /// - Returns: ChartContent
+    func _annotation(value: Any, font: Font?, foregroundStyle: HierarchicalShapeStyle) -> some ChartContent {
+        
+        annotation(position: .automatic) {
+            Text("\(value)")
+                .font(font)
+                .foregroundStyle(foregroundStyle)
         }
     }
 }

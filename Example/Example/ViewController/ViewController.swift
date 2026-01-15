@@ -15,22 +15,27 @@ final class ViewController: UIViewController {
     
     @IBOutlet weak var barChartsView: UIView!
     @IBOutlet weak var lineChartsView: UIView!
-    
-    private var barCharts: WWSwiftUI.BarMark<ChartsData>!
+    @IBOutlet weak var pointChartsView: UIView!
+
+    private var barCharts: WWSwiftUI.BarMark<BarChartsData>!
     private var lineCharts: WWSwiftUI.LineMark<LineChartsData>!
-    
-    private var barViewModel: WWSwiftUI.BarMarkViewModel<ChartsData> = .init()
+    private var pointCharts: WWSwiftUI.PointMark<PointChartsData>!
+
+    private var barViewModel: WWSwiftUI.BarMarkViewModel<BarChartsData> = .init()
     private var lineViewModel: WWSwiftUI.LineMarkViewModel<LineChartsData> = .init()
+    private var pointViewModel: WWSwiftUI.PointMarkViewModel<PointChartsData> = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initBarChart()
         initLineChart()
+        initPointChart()
     }
     
     @IBAction func valueSetting(_ sender: UIBarButtonItem) {
         barChartSetting()
         lineChartSetting()
+        pointChartSetting()
     }
 }
 
@@ -46,6 +51,14 @@ extension ViewController: WWSwiftUI.LineMarkDelegate {
     
     func lineMark<T: WWSwiftUI.LineMarkDataProtocol>(_ lineMark: WWSwiftUI.LineMark<T>, proxy: ChartProxy, didSelected location: CGPoint) {
         guard let item = proxy.value(at: location, as: (Date, Int).self) else { return }
+        print(item)
+    }
+}
+
+extension ViewController: WWSwiftUI.PointMarkDelegate {
+    
+    func pointMark<T: WWSwiftUI.PointMarkValueProtocol>(_ pointMark: WWSwiftUI.PointMark<T>, proxy: ChartProxy, didSelected location: CGPoint) {
+        guard let item = proxy.value(at: location, as: (Int, Int).self) else { return }
         print(item)
     }
 }
@@ -67,9 +80,15 @@ private extension ViewController {
         lineCharts.move(toParent: self, on: lineChartsView)
     }
     
+    func initPointChart() {
+        pointCharts = .init(model: pointViewModel, useAnnotation: true)
+        pointViewModel.data = [.init(label: "Taipei", xValue: 16, yValue: 26)]
+        pointCharts.move(toParent: self, on: pointChartsView)
+    }
+    
     func barChartSetting() {
-               
-        let stepsData: [ChartsData] = [
+        
+        let stepsData: [BarChartsData] = [
             .init(label: "Sun", value: 5900),
             .init(label: "Mon", value: 6500),
             .init(label: "Tue", value: 7200),
@@ -110,5 +129,18 @@ private extension ViewController {
         ]
         
         lineCharts.delegate = self
+    }
+    
+    func pointChartSetting() {
+        
+        pointViewModel.data = [
+            .init(label: "Taipei", xValue: 16, yValue: 26),
+            .init(label: "Taipei", xValue: 23, yValue: 32),
+            .init(label: "Taipei", xValue: 15, yValue: 16),
+            .init(label: "Hong Kong", xValue: 22, yValue: 25),
+            .init(label: "Hong Kong", xValue: 10, yValue: 5),
+        ]
+        
+        pointCharts.delegate = self
     }
 }

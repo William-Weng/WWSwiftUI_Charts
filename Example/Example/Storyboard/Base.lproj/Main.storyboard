@@ -21,12 +21,16 @@
                                 <rect key="frame" x="16" y="156" width="382" height="584"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZR1-zG-ECJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="288"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="189.5"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58R-de-jSp">
-                                        <rect key="frame" x="0.0" y="296" width="382" height="288"/>
+                                        <rect key="frame" x="0.0" y="197.5" width="382" height="189"/>
                                         <color key="backgroundColor" red="0.45009386540000001" green="0.98132258650000004" blue="0.4743030667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egN-5f-xbp">
+                                        <rect key="frame" x="0.0" y="394.5" width="382" height="189.5"/>
+                                        <color key="backgroundColor" systemColor="tintColor"/>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -50,6 +54,7 @@
                     <connections>
                         <outlet property="barChartsView" destination="ZR1-zG-ECJ" id="lyh-pc-mkt"/>
                         <outlet property="lineChartsView" destination="58R-de-jSp" id="nOI-Vh-4g9"/>
+                        <outlet property="pointChartsView" destination="egN-5f-xbp" id="LSJ-81-WwY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -81,6 +86,9 @@
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

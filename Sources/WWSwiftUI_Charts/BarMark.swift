@@ -1,5 +1,5 @@
 //
-//  Charts.swift
+//  BarMark.swift
 //  WWSwiftUI_MultiDatePicker
 //
 //  Created by William.Weng on 2026/1/7.
@@ -22,7 +22,7 @@ public extension WWSwiftUI {
         
         private var viewDelegateModel = BarMarkViewDelegateModel()
         
-        /// 初始化設定
+        /// [初始化設定](https://juejin.cn/post/7566208104909864996)
         /// - Parameters:
         ///   - model: BarMarkViewModel<T>
         ///   - barWidth: 柱體寬度

@@ -63,15 +63,15 @@ public extension WWSwiftUI {
                     
                     lineMarkMaker(item: item, orientation: orientation, unit: unit)
                         .lineStyle(StrokeStyle(lineWidth: lineWidth))
-                        .foregroundStyle(by: .value("Label", series.label))
-                        .symbol(by: .value("Label", series.label))
-                    
+                        .foregroundStyle(by: .value(fieldKey.label, series.label))
+                        .symbol(by: .value(fieldKey.label, series.label))
+
                     if (useAnnotation) { pointMarkMaker(item: item, orientation: orientation, unit: unit) }
                 }
             }
-            ._if(!lineColors.isEmpty) {
-                $0.chartForegroundStyleScale(range: lineColors)
-                  .chartLegend(.visible)
+            ._if(!lineColors.isEmpty) { chart in
+                chart.chartForegroundStyleScale(range: lineColors)
+                     .chartLegend(.visible)
             }
             ._if(viewDelegateModel.delegate != nil) { chart in
                 chart._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }
@@ -113,12 +113,7 @@ private extension WWSwiftUI.LineMarkView {
         case .vertical: pointMark = PointMark(x: .value(fieldKey.label, item.date, unit: unit), y: .value(fieldKey.value, item.value))
         }
         
-        let content = pointMark
-            .annotation(position: .automatic, alignment: .center) {
-                Text("\(item.value)")
-                .font(.caption2)
-            }
-        
+        let content = pointMark._annotation(value: item.value, font: .caption2, foregroundStyle: .primary)
         return content
     }
 }

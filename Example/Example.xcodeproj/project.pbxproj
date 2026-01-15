@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		811E0FCF2F164396000E7908 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 811E0FCE2F164396000E7908 /* WWSwiftUI_Charts */; };
 		811E0FD52F1648C3000E7908 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 811E0FD42F1648C3000E7908 /* WWSwiftUI_Charts */; };
+		811E70DC2F18E9ED00805857 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 811E70DB2F18E9ED00805857 /* WWSwiftUI_Charts */; };
 		8144219C2F17692500F9DF1E /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8144219B2F17692500F9DF1E /* WWSwiftUI_Charts */; };
 		817F54AE2F15E2AD006BBADB /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 817F54AD2F15E2AD006BBADB /* WWSwiftUI_Charts */; };
 		819FA3582F178CA40026D732 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 819FA3572F178CA40026D732 /* WWSwiftUI_Charts */; };
@@ -16,7 +17,7 @@
 		81A1845F2F172AA6000DDA51 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 81A1845E2F172AA6000DDA51 /* WWSwiftUI_Charts */; };
 		81F6FE822F148FFB0018BDCC /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 81F6FE812F148FFB0018BDCC /* WWSwiftUI_Charts */; };
 		81FEFB0A2F18C88100B43088 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 81FEFB092F18C88100B43088 /* WWSwiftUI_Charts */; };
-		81FEFB0D2F18C8D300B43088 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 81FEFB0C2F18C8D300B43088 /* WWSwiftUI_Charts */; };
+		81FEFB102F18CD6200B43088 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 81FEFB0F2F18CD6200B43088 /* WWSwiftUI_Charts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,9 +55,10 @@
 				811E0FD52F1648C3000E7908 /* WWSwiftUI_Charts in Frameworks */,
 				81A1845F2F172AA6000DDA51 /* WWSwiftUI_Charts in Frameworks */,
 				8144219C2F17692500F9DF1E /* WWSwiftUI_Charts in Frameworks */,
+				811E70DC2F18E9ED00805857 /* WWSwiftUI_Charts in Frameworks */,
 				81F6FE822F148FFB0018BDCC /* WWSwiftUI_Charts in Frameworks */,
 				819FA35E2F1792090026D732 /* WWSwiftUI_Charts in Frameworks */,
-				81FEFB0D2F18C8D300B43088 /* WWSwiftUI_Charts in Frameworks */,
+				81FEFB102F18CD6200B43088 /* WWSwiftUI_Charts in Frameworks */,
 				819FA3582F178CA40026D732 /* WWSwiftUI_Charts in Frameworks */,
 				817F54AE2F15E2AD006BBADB /* WWSwiftUI_Charts in Frameworks */,
 			);
@@ -110,7 +112,8 @@
 				819FA3572F178CA40026D732 /* WWSwiftUI_Charts */,
 				819FA35D2F1792090026D732 /* WWSwiftUI_Charts */,
 				81FEFB092F18C88100B43088 /* WWSwiftUI_Charts */,
-				81FEFB0C2F18C8D300B43088 /* WWSwiftUI_Charts */,
+				81FEFB0F2F18CD6200B43088 /* WWSwiftUI_Charts */,
+				811E70DB2F18E9ED00805857 /* WWSwiftUI_Charts */,
 			);
 			productName = Example;
 			productReference = 817EE1FE2EB1FA050036B57C /* Example.app */;
@@ -141,7 +144,7 @@
 			mainGroup = 817EE1F52EB1FA050036B57C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				81FEFB0B2F18C8D300B43088 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */,
+				811E70DA2F18E9ED00805857 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 817EE1FF2EB1FA050036B57C /* Products */;
@@ -385,12 +388,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		81FEFB0B2F18C8D300B43088 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */ = {
+		811E70DA2F18E9ED00805857 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWSwiftUI_Charts";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.4;
+				minimumVersion = 1.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -402,6 +405,11 @@
 		};
 		811E0FD42F1648C3000E7908 /* WWSwiftUI_Charts */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = WWSwiftUI_Charts;
+		};
+		811E70DB2F18E9ED00805857 /* WWSwiftUI_Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 811E70DA2F18E9ED00805857 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */;
 			productName = WWSwiftUI_Charts;
 		};
 		8144219B2F17692500F9DF1E /* WWSwiftUI_Charts */ = {
@@ -432,9 +440,8 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = WWSwiftUI_Charts;
 		};
-		81FEFB0C2F18C8D300B43088 /* WWSwiftUI_Charts */ = {
+		81FEFB0F2F18CD6200B43088 /* WWSwiftUI_Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81FEFB0B2F18C8D300B43088 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */;
 			productName = WWSwiftUI_Charts;
 		};
 /* End XCSwiftPackageProductDependency section */

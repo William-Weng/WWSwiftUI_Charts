@@ -1,5 +1,5 @@
 //
-//  Charts.swift
+//  LineMark.swift
 //  WWSwiftUI_MultiDatePicker
 //
 //  Created by William.Weng on 2026/1/7.
@@ -22,7 +22,7 @@ public extension WWSwiftUI {
         
         private var viewDelegateModel = LineMarkViewDelegateModel()
         
-        /// 初始化設定
+        /// [初始化設定](https://developer.apple.com/videos/play/wwdc2022/10137/)
         /// - Parameters:
         ///   - lineWidth: 線寬
         ///   - lineColors: 線段顏色
@@ -39,6 +39,7 @@ public extension WWSwiftUI {
         
         deinit {
             delegate = nil
+            viewDelegateModel.delegate = nil
             hostingController.willMove(toParent: .none)
             hostingController.view.removeFromSuperview()
             hostingController.removeFromParent()

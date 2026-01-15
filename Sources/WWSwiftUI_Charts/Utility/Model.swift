@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Model.swift
 //  WWSwiftUI_Charts
 //
 //  Created by William.Weng on 2026/1/12.
@@ -21,6 +21,13 @@ public extension WWSwiftUI {
     }
     
     class LineMarkViewModel<T: WWSwiftUI.LineMarkDataProtocol>: ObservableObject {
+        
+        @Published public var data: [T] = []
+        
+        public init() {}
+    }
+    
+    class PointMarkViewModel<T: WWSwiftUI.PointMarkValueProtocol>: ObservableObject {
         
         @Published public var data: [T] = []
         
@@ -54,6 +61,20 @@ extension WWSwiftUI {
         /// 設定Delegate (觸發 @ObservedObject)
         /// - Parameter delegate: WWSwiftUI.LineMarkViewDelegate?
         func setDelegate(_ delegate: WWSwiftUI.LineMarkViewDelegate?) {
+            self.delegate = delegate
+            objectWillChange.send()
+        }
+    }
+    
+    class PointMarkViewDelegateModel: ObservableObject {
+        
+        @Published var delegate: WWSwiftUI.PointMarkViewDelegate?
+        
+        init() {}
+        
+        /// 設定Delegate (觸發 @ObservedObject)
+        /// - Parameter delegate: WWSwiftUI.PointMarkViewDelegate?
+        func setDelegate(_ delegate: WWSwiftUI.PointMarkViewDelegate?) {
             self.delegate = delegate
             objectWillChange.send()
         }

@@ -36,8 +36,18 @@ public extension WWSwiftUI {
         
         associatedtype Data: LineMarkValueProtocol
 
-        var label: String { get set }   // 標題文字
+        var label: String { get set }   // 標題文字 (分類)
         var data: [Data] { get set }    // 數值
+    }
+    
+    protocol PointMarkValueProtocol: ChartsDataProtocol {
+        
+        associatedtype ValueX: Plottable
+        associatedtype ValueY: Plottable
+
+        var label: String { get set }   // 標題文字 (分類)
+        var xValue: ValueX { get set }  // x軸的值
+        var yValue: ValueY { get set }  // y軸的值
     }
 }
 
@@ -55,6 +65,12 @@ public extension WWSwiftUI {
         /// 點擊到時的反應
         func lineMark<T: LineMarkDataProtocol>(_ lineMark: LineMark<T>, proxy: ChartProxy, didSelected location: CGPoint)
     }
+    
+    protocol PointMarkDelegate: AnyObject {
+        
+        /// 點擊到時的反應
+        func pointMark<T: PointMarkValueProtocol>(_ pointMark: PointMark<T>, proxy: ChartProxy, didSelected location: CGPoint)
+    }
 }
 
 // MARK: - 數值協定 (SwiftUI => UIKit)
@@ -66,5 +82,9 @@ extension WWSwiftUI {
     
     protocol LineMarkViewDelegate: ObservableObject {
         func lineMarkView<T: LineMarkDataProtocol>(_ lineMarkView: WWSwiftUI.LineMarkView<T>, proxy: ChartProxy, didSelected location: CGPoint)
+    }
+    
+    protocol PointMarkViewDelegate: ObservableObject {
+        func pointMarkView<T: PointMarkValueProtocol>(_ pointMarkView: WWSwiftUI.PointMarkView<T>, proxy: ChartProxy, didSelected location: CGPoint)
     }
 }

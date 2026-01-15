@@ -58,13 +58,11 @@ public extension WWSwiftUI {
                 let index = model.data.firstIndex(where: { $0.id == item.id }) ?? 0
                 
                 barMarkMaker(item: item, orientation: orientation)
-                    .foregroundStyle(barColors[index % barColors.count])
-                    ._if(useAnnotation) {
-                        $0.annotation(position: .automatic) {
-                            Text("\(item.value)")
-                                .font(.caption2)
-                                .foregroundStyle(.primary)
-                        }
+                    ._if(!barColors.isEmpty) { chart in
+                        chart.foregroundStyle(barColors[index % barColors.count])
+                    }
+                    ._if(useAnnotation) { chart in
+                        chart._annotation(value: item.value, font: .caption2, foregroundStyle : .primary)
                     }
             }
             ._if(viewDelegateModel.delegate != nil) { chart in
