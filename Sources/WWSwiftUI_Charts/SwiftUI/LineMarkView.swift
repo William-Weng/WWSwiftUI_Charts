@@ -2,7 +2,7 @@
 //  LineMarkView.swift
 //  WWSwiftUI_Charts
 //
-//  Created by iOS on 2026/1/13.
+//  Created by William.Weng on 2026/1/13.
 //
 
 import SwiftUI
@@ -14,14 +14,15 @@ public extension WWSwiftUI {
     
     struct LineMarkView<T: WWSwiftUI.LineMarkDataProtocol>: View {
         
+        @ObservedObject var model: LineMarkViewModel<T>
+        @ObservedObject var viewDelegateModel: LineMarkViewDelegateModel
+        
         private let fieldKey = (label: "Label", value: "Value")
         private let orientation: NSLayoutConstraint.Axis
         private let unit: Calendar.Component
         private let lineWidth: CGFloat
         private let lineColors: [Color]
         private let useAnnotation: Bool
-                
-        @ObservedObject var model: LineMarkViewModel<T>
         
         /// [初始化設定](https://ithelp.ithome.com.tw/articles/10291932)
         /// - Parameters:
@@ -32,12 +33,26 @@ public extension WWSwiftUI {
         ///   - unit: 時間單位
         ///   - orientation: 顯示方向 (橫 / 直)
         public init(model: LineMarkViewModel<T>, lineWidth: CGFloat = 1, lineColors: [Color] = [], useAnnotation: Bool = false, unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
+            self.init(model: model, viewDelegateModel: .init(), lineWidth: lineWidth, lineColors: lineColors, useAnnotation: useAnnotation, unit: unit, orientation: orientation)
+        }
+        
+        /// [初始化設定](https://ithelp.ithome.com.tw/articles/10291932)
+        /// - Parameters:
+        ///   - model: LineMarkViewModel<T>
+        ///   - viewDelegateModel: 線寬
+        ///   - lineWidth: 線寬
+        ///   - lineColors: 線段顏色
+        ///   - useAnnotation: 是否顯示數值文字
+        ///   - unit: 時間單位
+        ///   - orientation: 顯示方向 (橫 / 直)
+        init(model: LineMarkViewModel<T>, viewDelegateModel: LineMarkViewDelegateModel, lineWidth: CGFloat, lineColors: [Color], useAnnotation: Bool, unit: Calendar.Component, orientation: NSLayoutConstraint.Axis) {
             self.model = model
             self.orientation = orientation
             self.unit = unit
             self.lineWidth = lineWidth
             self.lineColors = lineColors
             self.useAnnotation = useAnnotation
+            self.viewDelegateModel = viewDelegateModel
         }
         
         public var body: some View {
@@ -57,6 +72,9 @@ public extension WWSwiftUI {
             ._if(!lineColors.isEmpty) {
                 $0.chartForegroundStyleScale(range: lineColors)
                   .chartLegend(.visible)
+            }
+            ._if(viewDelegateModel.delegate != nil) { chart in
+                chart._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }
             }
             .background(.clear)
             .padding()

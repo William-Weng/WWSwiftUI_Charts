@@ -10,7 +10,7 @@
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.1.3"))
+    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.1.4"))
 ]
 ```
 
@@ -20,10 +20,17 @@ dependencies: [
 |BarMark(model:barWidth:barColors:useAnnotation:orientation:)|初始化 (柱狀圖)|
 |LineMark(model:lineWidth:lineColors:useAnnotation:unit:orientation:)|初始化 (折線圖)|
 
+### 可用函式 (Delegate)
+|函式|功能|
+|-|-|
+|barMark(_proxy:didSelected:)|點擊圖表的反應|
+|lineMark(_proxy:didSelected:)|點擊圖表的反應|
+
 ### Example (UIKit)
 ```swift
 import UIKit
 import SwiftUI
+import Charts
 import WWSwiftUI_MultiDatePicker
 import WWSwiftUI_Charts
 
@@ -47,6 +54,22 @@ final class ViewController: UIViewController {
     @IBAction func valueSetting(_ sender: UIBarButtonItem) {
         barChartSetting()
         lineChartSetting()
+    }
+}
+
+extension ViewController: WWSwiftUI.BarMarkDelegate {
+    
+    func barMark<T: WWSwiftUI.BarMarkValueProtocol>(_ barMark: WWSwiftUI.BarMark<T>, proxy: ChartProxy, didSelected location: CGPoint) {
+        guard let item = proxy.value(at: location, as: (String, Int).self) else { return }
+        print(item)
+    }
+}
+
+extension ViewController: WWSwiftUI.LineMarkDelegate {
+    
+    func lineMark<T: WWSwiftUI.LineMarkDataProtocol>(_ lineMark: WWSwiftUI.LineMark<T>, proxy: ChartProxy, didSelected location: CGPoint) {
+        guard let item = proxy.value(at: location, as: (Date, Int).self) else { return }
+        print(item)
     }
 }
 
@@ -80,6 +103,7 @@ private extension ViewController {
         ]
         
         barViewModel.data = stepsData
+        barCharts.delegate = self
     }
     
     func lineChartSetting() {
@@ -107,6 +131,8 @@ private extension ViewController {
             .init(label: "Taipei", data: taipeiData),
             .init(label: "Hong Kong", data: hkData)
         ]
+        
+        lineCharts.delegate = self
     }
 }
 ```

@@ -27,3 +27,35 @@ public extension WWSwiftUI {
         public init() {}
     }
 }
+
+// MARK: - Delegate模型
+extension WWSwiftUI {
+    
+    class BarMarkViewDelegateModel: ObservableObject {
+        
+        @Published var delegate: WWSwiftUI.BarMarkViewDelegate?
+        
+        init() {}
+        
+        /// 設定Delegate (觸發 @ObservedObject)
+        /// - Parameter delegate: WWSwiftUI.BarMarkViewDelegate?
+        func setDelegate(_ delegate: WWSwiftUI.BarMarkViewDelegate?) {
+            self.delegate = delegate
+            objectWillChange.send()
+        }
+    }
+    
+    class LineMarkViewDelegateModel: ObservableObject {
+        
+        @Published var delegate: WWSwiftUI.LineMarkViewDelegate?
+        
+        init() {}
+        
+        /// 設定Delegate (觸發 @ObservedObject)
+        /// - Parameter delegate: WWSwiftUI.LineMarkViewDelegate?
+        func setDelegate(_ delegate: WWSwiftUI.LineMarkViewDelegate?) {
+            self.delegate = delegate
+            objectWillChange.send()
+        }
+    }
+}

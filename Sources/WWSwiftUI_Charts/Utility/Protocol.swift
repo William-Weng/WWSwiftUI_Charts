@@ -40,3 +40,31 @@ public extension WWSwiftUI {
         var data: [Data] { get set }    // 數值
     }
 }
+
+// MARK: - 數值協定
+public extension WWSwiftUI {
+    
+    protocol BarMarkDelegate: AnyObject {
+        
+        /// 點擊到時的反應
+        func barMark<T: BarMarkValueProtocol>(_ barMark: BarMark<T>, proxy: ChartProxy, didSelected location: CGPoint)
+    }
+    
+    protocol LineMarkDelegate: AnyObject {
+        
+        /// 點擊到時的反應
+        func lineMark<T: LineMarkDataProtocol>(_ lineMark: LineMark<T>, proxy: ChartProxy, didSelected location: CGPoint)
+    }
+}
+
+// MARK: - 數值協定 (SwiftUI => UIKit)
+extension WWSwiftUI {
+    
+    protocol BarMarkViewDelegate: ObservableObject {
+        func barMarkView<T: BarMarkValueProtocol>(_ barMarkView: WWSwiftUI.BarMarkView<T>, proxy: ChartProxy, didSelected location: CGPoint)
+    }
+    
+    protocol LineMarkViewDelegate: ObservableObject {
+        func lineMarkView<T: LineMarkDataProtocol>(_ lineMarkView: WWSwiftUI.LineMarkView<T>, proxy: ChartProxy, didSelected location: CGPoint)
+    }
+}

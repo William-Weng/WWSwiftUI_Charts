@@ -14,10 +14,13 @@ import WWSwiftUI_MultiDatePicker
 public extension WWSwiftUI {
     
     class BarMark<T: BarMarkValueProtocol>: WWSwiftUI.`Protocol` {
-                
+        
         public let hostingController: UIHostingController<AnyView>
         
         public var view: UIView { hostingController.view }
+        public weak var delegate: WWSwiftUI.BarMarkDelegate?
+        
+        private var viewDelegateModel = BarMarkViewDelegateModel()
         
         /// 初始化設定
         /// - Parameters:
@@ -27,14 +30,27 @@ public extension WWSwiftUI {
         ///   - useAnnotation: 是否顯示數值文字
         ///   - orientation: 方向 (水平 / 垂直)
         public init<T>(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [.blue], useAnnotation: Bool = false, orientation: NSLayoutConstraint.Axis = .vertical) {
-            let rootView = WWSwiftUI.BarMarkView(model: model, barWidth: barWidth, barColors: barColors, useAnnotation: useAnnotation, orientation: orientation)
+            
+            let rootView = WWSwiftUI.BarMarkView(model: model, viewDelegateModel: viewDelegateModel, barWidth: barWidth, barColors: barColors, useAnnotation: useAnnotation, orientation: orientation)
+            
             hostingController = UIHostingController(rootView: AnyView(rootView))
+            viewDelegateModel.setDelegate(self)
         }
         
         deinit {
+            delegate = nil
+            viewDelegateModel.delegate = nil
             hostingController.willMove(toParent: .none)
             hostingController.view.removeFromSuperview()
             hostingController.removeFromParent()
         }
+    }
+}
+
+// MARK: - WWSwiftUI.BarMarkViewDelegate
+extension WWSwiftUI.BarMark: WWSwiftUI.BarMarkViewDelegate {
+    
+    func barMarkView<T: WWSwiftUI.BarMarkValueProtocol>(_ barMarkView: WWSwiftUI.BarMarkView<T>, proxy: ChartProxy, didSelected location: CGPoint) {
+        delegate?.barMark(self, proxy: proxy, didSelected: location)
     }
 }

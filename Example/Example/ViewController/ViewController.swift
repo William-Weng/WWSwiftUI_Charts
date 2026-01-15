@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Charts
 import WWSwiftUI_MultiDatePicker
 import WWSwiftUI_Charts
 
@@ -30,6 +31,22 @@ final class ViewController: UIViewController {
     @IBAction func valueSetting(_ sender: UIBarButtonItem) {
         barChartSetting()
         lineChartSetting()
+    }
+}
+
+extension ViewController: WWSwiftUI.BarMarkDelegate {
+    
+    func barMark<T: WWSwiftUI.BarMarkValueProtocol>(_ barMark: WWSwiftUI.BarMark<T>, proxy: ChartProxy, didSelected location: CGPoint) {
+        guard let item = proxy.value(at: location, as: (String, Int).self) else { return }
+        print(item)
+    }
+}
+
+extension ViewController: WWSwiftUI.LineMarkDelegate {
+    
+    func lineMark<T: WWSwiftUI.LineMarkDataProtocol>(_ lineMark: WWSwiftUI.LineMark<T>, proxy: ChartProxy, didSelected location: CGPoint) {
+        guard let item = proxy.value(at: location, as: (Date, Int).self) else { return }
+        print(item)
     }
 }
 
@@ -63,6 +80,7 @@ private extension ViewController {
         ]
         
         barViewModel.data = stepsData
+        barCharts.delegate = self
     }
     
     func lineChartSetting() {
@@ -90,5 +108,7 @@ private extension ViewController {
             .init(label: "Taipei", data: taipeiData),
             .init(label: "Hong Kong", data: hkData)
         ]
+        
+        lineCharts.delegate = self
     }
 }
