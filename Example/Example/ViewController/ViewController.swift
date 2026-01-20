@@ -100,6 +100,7 @@ private extension ViewController {
         
         barViewModel.data = stepsData
         barCharts.delegate = self
+        barCharts.updateChart()
     }
     
     func lineChartSetting() {

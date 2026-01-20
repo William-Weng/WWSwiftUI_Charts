@@ -10,7 +10,7 @@
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.2.0"))
+    .package(url: "https://github.com/William-Weng/WWSwiftUI_Charts.git", .upToNextMajor(from: "1.2.1"))
 ]
 ```
 
@@ -27,6 +27,8 @@ dependencies: [
 |barMark(_:proxy:didSelected:)|點擊圖表的反應 (柱狀圖)|
 |lineMark(_:proxy:didSelected:)|點擊圖表的反應 (折線圖)|
 |pointMark(_:proxy:didSelected:)|點擊圖表的反應 (散點圖)|
+|move(toParent:on:)|移動到UIViewController上|
+|updateChart(animation:)|產生更新動畫|
 
 ### Example (UIKit)
 ```swift
@@ -125,6 +127,7 @@ private extension ViewController {
         
         barViewModel.data = stepsData
         barCharts.delegate = self
+        barCharts.updateChart()
     }
     
     func lineChartSetting() {

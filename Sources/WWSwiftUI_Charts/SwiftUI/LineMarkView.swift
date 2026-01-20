@@ -12,7 +12,7 @@ import WWSwiftUI_MultiDatePicker
 // MARK: - 折線圖 (SwiftUI)
 public extension WWSwiftUI {
     
-    struct LineMarkView<T: WWSwiftUI.LineMarkDataProtocol>: View {
+    struct LineMarkView<T: LineMarkDataProtocol>: View {
         
         @ObservedObject var model: LineMarkViewModel<T>
         @ObservedObject var viewDelegateModel: LineMarkViewDelegateModel
@@ -73,9 +73,7 @@ public extension WWSwiftUI {
                 chart.chartForegroundStyleScale(range: lineColors)
                      .chartLegend(.visible)
             }
-            ._if(viewDelegateModel.delegate != nil) { chart in
-                chart._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }
-            }
+            ._if(viewDelegateModel.delegate != nil) { $0._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }}
             .background(.clear)
             .padding()
         }

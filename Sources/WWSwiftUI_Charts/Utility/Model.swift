@@ -5,10 +5,9 @@
 //  Created by William.Weng on 2026/1/12.
 //
 
-import Combine
+import SwiftUI
 import WWSwiftUI_MultiDatePicker
 import WWSwiftUI_Charts
-import Foundation
 
 // MARK: - 資料模型 (泛型)
 public extension WWSwiftUI {
@@ -18,6 +17,10 @@ public extension WWSwiftUI {
         @Published public var data: [T] = []
         
         public init() {}
+        
+        public func maxData() -> T? {
+            return data.max(by: { $0.value < $1.value })
+        }
     }
     
     class LineMarkViewModel<T: WWSwiftUI.LineMarkDataProtocol>: ObservableObject {
@@ -41,6 +44,7 @@ extension WWSwiftUI {
     class BarMarkViewDelegateModel: ObservableObject {
         
         @Published var delegate: WWSwiftUI.BarMarkViewDelegate?
+        @Published var progress: Double = 1.00
         
         init() {}
         
@@ -49,6 +53,21 @@ extension WWSwiftUI {
         func setDelegate(_ delegate: WWSwiftUI.BarMarkViewDelegate?) {
             self.delegate = delegate
             objectWillChange.send()
+        }
+        
+        /// 圖表動畫 (0% ~ 100%)
+        /// - Parameter animation: Animation
+        func updateChart(animation: Animation) {
+            
+            progress = 0.0
+            
+            Task { @MainActor in
+                
+                let transaction = Transaction(animation: animation)
+                
+                try await Task.sleep(for: .milliseconds(100))
+                withTransaction(transaction) { [unowned self] in progress = 1.0 }
+            }
         }
     }
     

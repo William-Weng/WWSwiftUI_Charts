@@ -12,13 +12,13 @@ import WWSwiftUI_MultiDatePicker
 // MARK: - 資料協定 (泛型)
 public extension WWSwiftUI {
     
-    protocol ChartsDataProtocol: Identifiable {
+    protocol ChartsDataProtocol: Identifiable, Equatable {
         var id: UUID { get }            // 唯一識別碼
     }
     
     protocol BarMarkValueProtocol: ChartsDataProtocol {
         
-        associatedtype Value: Plottable
+        associatedtype Value: Plottable, Comparable
         
         var label: String { get set }   // 標題文字
         var value: Value { get set }    // 數值
@@ -26,7 +26,7 @@ public extension WWSwiftUI {
     
     protocol LineMarkValueProtocol: ChartsDataProtocol {
         
-        associatedtype Value: Plottable
+        associatedtype Value: Plottable, Comparable
         
         var date: Date { get set }      // 日期
         var value: Value { get set }    // 數值
@@ -42,13 +42,17 @@ public extension WWSwiftUI {
     
     protocol PointMarkValueProtocol: ChartsDataProtocol {
         
-        associatedtype ValueX: Plottable
-        associatedtype ValueY: Plottable
+        associatedtype ValueX: Plottable, Comparable
+        associatedtype ValueY: Plottable, Comparable
 
         var label: String { get set }   // 標題文字 (分類)
         var xValue: ValueX { get set }  // x軸的值
         var yValue: ValueY { get set }  // y軸的值
     }
+}
+
+public extension WWSwiftUI.ChartsDataProtocol {
+    static func == (lhs: Self, rhs: Self) -> Bool { lhs.id == rhs.id }
 }
 
 // MARK: - 數值協定

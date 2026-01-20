@@ -17,7 +17,7 @@ public extension WWSwiftUI {
         @ObservedObject var model: PointMarkViewModel<T>
         @ObservedObject var viewDelegateModel: PointMarkViewDelegateModel
 
-        private let fieldKey = (label: "Label", xAxis: "X-axis", yAxis: "X-axis")
+        private let fieldKey = (label: "Label", xAxis: "X-axis", yAxis: "Y-axis")
         private let symbolSize: CGFloat
         private let useAnnotation: Bool
         
@@ -50,12 +50,8 @@ public extension WWSwiftUI {
                     .symbol(by: .value(fieldKey.label, point.label))
                     .symbolSize(symbolSize)
                     .foregroundStyle(by: .value(fieldKey.label, point.label))
-                    ._if(useAnnotation) { chart in
-                        chart._annotation(value: point.xValue, font: .caption2, foregroundStyle: .primary)
-                    }
-            }._if(viewDelegateModel.delegate != nil) { chart in
-                chart._chartOverlayOnTap { viewDelegateModel.delegate?.pointMarkView(self, proxy: $0, didSelected: $1) }
-            }
+                    ._if(useAnnotation) { $0._annotation(value: point.xValue, font: .caption2, foregroundStyle: .primary) }
+            }._if(viewDelegateModel.delegate != nil) { $0._chartOverlayOnTap { viewDelegateModel.delegate?.pointMarkView(self, proxy: $0, didSelected: $1) }}
             .background(.clear)
             .padding()
         }
