@@ -5,7 +5,7 @@
 - [Transfer SwiftUI's Charts to UIKit.](https://developer.apple.com/documentation/Charts)
 - [將SwiftUI的圖表功能轉給UIKit使用。](https://www.appcoda.com.tw/swiftui-line-charts/)
 
-![](https://github.com/user-attachments/assets/f52b2377-9dd6-465c-9f6f-1ea93f223298)
+https://github.com/user-attachments/assets/eee53083-90b3-412b-a2e7-c3c81c4a450c
 
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
