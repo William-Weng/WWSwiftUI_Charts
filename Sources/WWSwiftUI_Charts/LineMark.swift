@@ -47,6 +47,16 @@ public extension WWSwiftUI {
     }
 }
 
+// MARK: - 開放函式
+public extension WWSwiftUI.LineMark {
+    
+    /// 產生更新動畫
+    /// - Parameter animation: 動畫類型
+    func updateChart(animation: Animation = .easeOut(duration: 0.5)) {
+        viewDelegateModel.updateChart(animation: animation)
+    }
+}
+
 // MARK: - WWSwiftUI.LineMarkViewDelegate
 extension WWSwiftUI.LineMark: WWSwiftUI.LineMarkViewDelegate {
     

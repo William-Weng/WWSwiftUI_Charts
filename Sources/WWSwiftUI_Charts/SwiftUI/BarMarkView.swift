@@ -63,7 +63,7 @@ public extension WWSwiftUI {
             }
             ._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.barMarkView(self, proxy: $0, didSelected: $1) }
-                  .modifier(ScaleModifier(item: model.maxData(), orientation: orientation))
+                  .modifier(BarScaleModifier(maxData: model.maxData(), orientation: orientation))
             }
             .background(.clear)
             .padding()
@@ -82,30 +82,11 @@ private extension WWSwiftUI.BarMarkView {
     /// - Returns: BarMark
     func barMarkMaker<T: WWSwiftUI.BarMarkValueProtocol>(item: T, progress: Double, orientation: NSLayoutConstraint.Axis) -> BarMark {
         
-        let value = animatedValue(item: item, progress: progress)
+        let value = item.value._animatedValue(progress: progress)
         
         switch orientation {
         case .horizontal: return BarMark(x: .value(fieldKey.value, value), y: .value(fieldKey.label, item.label), width: barWidth)
         case .vertical: return BarMark(x: .value(fieldKey.label, item.label), y: .value(fieldKey.value, value), width: barWidth)
         }
-    }
-    
-    /// 決定動畫時的數值
-    /// - Parameters:
-    ///   - item: T: WWSwiftUI.BarMarkValueProtocol
-    ///   - progress: Double
-    /// - Returns: Double
-    func animatedValue<T: WWSwiftUI.BarMarkValueProtocol>(item: T, progress: Double) -> Double {
-        
-        let animatedValue: Double
-        
-        switch item.value {
-        case let intValue as Int: animatedValue = Double(intValue) * progress
-        case let floatValue as Float: animatedValue = floatValue * progress
-        case let doubleValue as Double: animatedValue = doubleValue * progress
-        default: animatedValue = 0
-        }
-        
-        return animatedValue
     }
 }

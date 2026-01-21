@@ -28,6 +28,15 @@ public extension WWSwiftUI {
         @Published public var data: [T] = []
         
         public init() {}
+        
+        public func maxData() -> T.Data? {
+            
+            let maxData = data.compactMap { _data_ in
+                _data_.data.max(by: { $0.value < $1.value })
+            }.max(by: { $0.value < $1.value })
+            
+            return maxData
+        }
     }
     
     class PointMarkViewModel<T: WWSwiftUI.PointMarkValueProtocol>: ObservableObject {
@@ -74,7 +83,8 @@ extension WWSwiftUI {
     class LineMarkViewDelegateModel: ObservableObject {
         
         @Published var delegate: WWSwiftUI.LineMarkViewDelegate?
-        
+        @Published var progress: Double = 1.00
+
         init() {}
         
         /// 設定Delegate (觸發 @ObservedObject)
@@ -82,6 +92,21 @@ extension WWSwiftUI {
         func setDelegate(_ delegate: WWSwiftUI.LineMarkViewDelegate?) {
             self.delegate = delegate
             objectWillChange.send()
+        }
+        
+        /// 圖表動畫 (0% ~ 100%)
+        /// - Parameter animation: Animation
+        func updateChart(animation: Animation) {
+            
+            progress = 0.0
+            
+            Task { @MainActor in
+                
+                let transaction = Transaction(animation: animation)
+                
+                try await Task.sleep(for: .milliseconds(100))
+                withTransaction(transaction) { [unowned self] in progress = 1.0 }
+            }
         }
     }
     

@@ -130,6 +130,7 @@ private extension ViewController {
         ]
         
         lineCharts.delegate = self
+        lineCharts.updateChart()
     }
     
     func pointChartSetting() {

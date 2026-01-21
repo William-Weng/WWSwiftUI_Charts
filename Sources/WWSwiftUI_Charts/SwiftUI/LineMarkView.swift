@@ -61,19 +61,22 @@ public extension WWSwiftUI {
                 
                 ForEach(series.data, id: \.id) { item in
                     
-                    lineMarkMaker(item: item, orientation: orientation, unit: unit)
+                    lineMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation, unit: unit)
                         .lineStyle(StrokeStyle(lineWidth: lineWidth))
                         .foregroundStyle(by: .value(fieldKey.label, series.label))
                         .symbol(by: .value(fieldKey.label, series.label))
 
-                    if (useAnnotation) { pointMarkMaker(item: item, orientation: orientation, unit: unit) }
+                    if (useAnnotation) { pointMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation, unit: unit) }
                 }
             }
             ._if(!lineColors.isEmpty) { chart in
                 chart.chartForegroundStyleScale(range: lineColors)
                      .chartLegend(.visible)
             }
-            ._if(viewDelegateModel.delegate != nil) { $0._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }}
+            ._if(viewDelegateModel.delegate != nil) {
+                $0._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }
+                    .modifier(LineScaleModifier(maxData: model.maxData(), orientation: orientation))
+            }
             .background(.clear)
             .padding()
         }
@@ -86,29 +89,35 @@ private extension WWSwiftUI.LineMarkView {
     /// 根據方向決定柱狀圖的x,y軸顯示
     /// - Parameters:
     ///   - item: <WWSwiftUI.LineMarkValueProtocol>
+    ///   - progress: 進度動畫 (0% ~ 100%)
     ///   - orientation: 方向 (水平 / 垂直)
     ///   - unit: 日期單位
     /// - Returns: BarMark
-    func lineMarkMaker<T: WWSwiftUI.LineMarkValueProtocol>(item: T, orientation: NSLayoutConstraint.Axis, unit: Calendar.Component) -> LineMark {
+    func lineMarkMaker<T: WWSwiftUI.LineMarkValueProtocol>(item: T, progress: Double, orientation: NSLayoutConstraint.Axis, unit: Calendar.Component) -> LineMark {
+        
+        let value = item.value._animatedValue(progress: progress)
+        
         switch orientation {
-        case .horizontal: return LineMark(x: .value(fieldKey.value, item.value), y: .value(fieldKey.label, item.date, unit: unit))
-        case .vertical: return LineMark(x: .value(fieldKey.label, item.date, unit: unit), y: .value(fieldKey.value, item.value))
+        case .horizontal: return LineMark(x: .value(fieldKey.value, value), y: .value(fieldKey.label, item.date, unit: unit))
+        case .vertical: return LineMark(x: .value(fieldKey.label, item.date, unit: unit), y: .value(fieldKey.value, value))
         }
     }
     
     /// 產生註記文字
     /// - Parameters:
     ///   - item: <WWSwiftUI.LineMarkValueProtocol>
+    ///   - progress: 進度動畫 (0% ~ 100%)
     ///   - orientation: 方向 (水平 / 垂直)
     ///   - unit: 日期單位
     /// - Returns: some ChartContent
-    func pointMarkMaker<T: WWSwiftUI.LineMarkValueProtocol>(item: T, orientation: NSLayoutConstraint.Axis, unit: Calendar.Component) -> some ChartContent {
+    func pointMarkMaker<T: WWSwiftUI.LineMarkValueProtocol>(item: T, progress: Double, orientation: NSLayoutConstraint.Axis, unit: Calendar.Component) -> some ChartContent {
         
         let pointMark: PointMark
+        let value = item.value._animatedValue(progress: progress)
         
         switch orientation {
-        case .horizontal: pointMark = PointMark(x: .value(fieldKey.value, item.value), y: .value(fieldKey.label, item.date, unit: unit))
-        case .vertical: pointMark = PointMark(x: .value(fieldKey.label, item.date, unit: unit), y: .value(fieldKey.value, item.value))
+        case .horizontal: pointMark = PointMark(x: .value(fieldKey.value, value), y: .value(fieldKey.label, item.date, unit: unit))
+        case .vertical: pointMark = PointMark(x: .value(fieldKey.label, item.date, unit: unit), y: .value(fieldKey.value, value))
         }
         
         let content = pointMark._annotation(value: item.value, font: .caption2, foregroundStyle: .primary)

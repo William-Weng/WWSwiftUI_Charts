@@ -51,6 +51,7 @@ public extension WWSwiftUI {
     }
 }
 
+// MARK: - 運算子
 public extension WWSwiftUI.ChartsDataProtocol {
     static func == (lhs: Self, rhs: Self) -> Bool { lhs.id == rhs.id }
 }

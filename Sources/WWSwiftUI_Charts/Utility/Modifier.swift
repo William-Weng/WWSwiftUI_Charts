@@ -12,45 +12,28 @@ import WWSwiftUI_MultiDatePicker
 // MARK: - 圖表尺規調整 (整合SwiftUI設定用)
 extension WWSwiftUI {
     
-    struct ScaleModifier<T: WWSwiftUI.BarMarkValueProtocol>: ViewModifier {
+    struct BarScaleModifier<T: WWSwiftUI.BarMarkValueProtocol>: ViewModifier {
         
-        let item: T?
+        let maxData: T?
         let orientation: NSLayoutConstraint.Axis
         
         func body(content: Content) -> some View {
-            fixScale(chart: content, orientation: orientation)
+            Utility.shared.fixScale(chart: content, value: maxData?.value, orientation: orientation)
         }
     }
 }
 
-// MARK: - 小工具
-private extension WWSwiftUI.ScaleModifier {
+// MARK: - 圖表尺規調整 (整合SwiftUI設定用)
+extension WWSwiftUI {
     
-    /// 修正軸上圖表尺規的最大值 (防止尺規產生動畫)
-    /// - Parameters:
-    ///   - chart: some View
-    ///   - minValue: 尺規最小值
-    ///   - orientation: 方向
-    /// - Returns: some View
-    func fixScale(chart: some View, minValue: Int = 1000, orientation: NSLayoutConstraint.Axis) -> some View {
+    struct LineScaleModifier<T: WWSwiftUI.LineMarkValueProtocol>: ViewModifier {
         
-        var maxScale = 100
+        let maxData: T?
+        let orientation: NSLayoutConstraint.Axis
         
-        if let value = item?.value as? Int { maxScale = value + minValue }
-        if let value = item?.value as? Double { maxScale = Int(value) + minValue }
-        
-        return Group {
-            
-            switch orientation {
-                case .horizontal:
-                chart
-                    .chartYAxis { AxisMarks(values: .automatic) }
-                    .chartXScale(domain: 0...maxScale)
-            case .vertical:
-                chart
-                    .chartXAxis { AxisMarks(values: .automatic) }
-                    .chartYScale(domain: 0...maxScale)
-            }
+        func body(content: Content) -> some View {
+            Utility.shared.fixScale(chart: content, value: maxData?.value, orientation: orientation)
         }
     }
 }
+
