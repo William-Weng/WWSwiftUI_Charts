@@ -87,11 +87,19 @@ extension WWSwiftUI {
     class PointMarkViewDelegateModel: BaseViewDelegateModel {
         
         @Published var delegate: WWSwiftUI.PointMarkViewDelegate?
-                
+        @Published var displayMode: WWSwiftUI.PointMarkDisplayMode = .full
+        
         /// 設定Delegate (觸發 @ObservedObject)
         /// - Parameter delegate: WWSwiftUI.PointMarkViewDelegate?
         func setDelegate(_ delegate: WWSwiftUI.PointMarkViewDelegate?) {
             self.delegate = delegate
+            objectWillChange.send()
+        }
+        
+        /// 設定顯示模式
+        /// - Parameter displayMode: WWSwiftUI.PointMarkDisplayMode
+        func setDisplayMode(_ displayMode: WWSwiftUI.PointMarkDisplayMode) {
+            self.displayMode = displayMode
             objectWillChange.send()
         }
     }

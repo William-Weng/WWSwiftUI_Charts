@@ -27,12 +27,14 @@ public extension WWSwiftUI {
         ///   - model: PointMarkViewModel<T>
         ///   - symbolSize: 散點的大小
         ///   - useAnnotation: 是否顯示數值文字
-        public init<T>(model: PointMarkViewModel<T>, symbolSize: CGFloat = 100, useAnnotation: Bool = false) {
+        ///   - displayMode: 顯示模式
+        public init<T>(model: PointMarkViewModel<T>, symbolSize: CGFloat = 100, useAnnotation: Bool = false, displayMode: WWSwiftUI.PointMarkDisplayMode = .full) {
             
             let rootView = WWSwiftUI.PointMarkView(model: model, viewDelegateModel: viewDelegateModel, symbolSize: symbolSize, useAnnotation: useAnnotation)
             
             hostingController = UIHostingController(rootView: AnyView(rootView))
             viewDelegateModel.setDelegate(self)
+            viewDelegateModel.setDisplayMode(displayMode)
         }
         
         deinit {

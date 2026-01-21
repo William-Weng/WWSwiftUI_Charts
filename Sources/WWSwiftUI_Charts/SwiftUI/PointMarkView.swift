@@ -50,7 +50,7 @@ public extension WWSwiftUI {
                     .symbol(by: .value(fieldKey.label, point.label))
                     .symbolSize(symbolSize)
                     .foregroundStyle(by: .value(fieldKey.label, point.label))
-                    ._if(useAnnotation) { $0._annotation(value: point.xValue, font: .caption2, foregroundStyle: .primary) }
+                    ._if(useAnnotation) { $0._annotation(value: formatValue(point, mode: viewDelegateModel.displayMode), font: .caption2, foregroundStyle: .primary) }
             }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.pointMarkView(self, proxy: $0, didSelected: $1) }
                     .modifier(PointScaleModifier(maxData: model.maxData()))
@@ -75,5 +75,19 @@ private extension WWSwiftUI.PointMarkView {
         let yValue = point.yValue._animatedValue(progress: progress)
         
         return PointMark(x: .value(fieldKey.xAxis, xValue), y: .value(fieldKey.yAxis, yValue))
+    }
+    
+    /// 處理數值顯示的格式
+    /// - Parameters:
+    ///   - value: T
+    ///   - mode: WWSwiftUI.PointMarkDisplayMode
+    /// - Returns: String
+    func formatValue(_ value: T, mode: WWSwiftUI.PointMarkDisplayMode) -> String {
+        
+        switch mode {
+        case .x: return "\(value.xValue)"
+        case .y: return "\(value.yValue)"
+        case .full: return "(\(value.xValue), \(value.yValue))"
+        }
     }
 }
