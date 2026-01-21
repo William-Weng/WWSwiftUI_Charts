@@ -20,6 +20,8 @@ dependencies: [
 |BarMark(model:barWidth:barColors:useAnnotation:orientation:)|初始化 (柱狀圖)|
 |LineMark(model:lineWidth:lineColors:useAnnotation:unit:orientation:)|初始化 (折線圖)|
 |PointMark(model:symbolSize:useAnnotation:)|初始化 (散點圖)|
+|move(toParent:on:)|移動到UIViewController上|
+|updateChart(animation:)|產生更新動畫|
 
 ### 可用函式 (Delegate)
 |函式|功能|
@@ -27,8 +29,6 @@ dependencies: [
 |barMark(_:proxy:didSelected:)|點擊圖表的反應 (柱狀圖)|
 |lineMark(_:proxy:didSelected:)|點擊圖表的反應 (折線圖)|
 |pointMark(_:proxy:didSelected:)|點擊圖表的反應 (散點圖)|
-|move(toParent:on:)|移動到UIViewController上|
-|updateChart(animation:)|產生更新動畫|
 
 ### Example (UIKit)
 ```swift
