@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/William-Weng/WWSwiftUI_Charts",
       "state" : {
-        "revision" : "7ffe360de27d7fff80bba11099e9511555e6e710",
-        "version" : "1.2.1"
+        "revision" : "1f9680c447b8d3da55050ca2dc931bc6f8466940",
+        "version" : "1.2.2"
       }
     },
     {

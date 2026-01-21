@@ -18,7 +18,7 @@ extension WWSwiftUI {
         let orientation: NSLayoutConstraint.Axis
         
         func body(content: Content) -> some View {
-            Utility.shared.fixScale(chart: content, value: maxData?.value, orientation: orientation)
+            Utility.shared.fixChartScale(chart: content, value: maxData?.value, orientation: orientation)
         }
     }
 }
@@ -32,8 +32,20 @@ extension WWSwiftUI {
         let orientation: NSLayoutConstraint.Axis
         
         func body(content: Content) -> some View {
-            Utility.shared.fixScale(chart: content, value: maxData?.value, orientation: orientation)
+            Utility.shared.fixChartScale(chart: content, value: maxData?.value, orientation: orientation)
         }
     }
 }
 
+// MARK: - 圖表尺規調整 (整合SwiftUI設定用)
+extension WWSwiftUI {
+    
+    struct PointScaleModifier<T: WWSwiftUI.PointMarkValueProtocol>: ViewModifier {
+        
+        let maxData: T?
+        
+        func body(content: Content) -> some View {
+            Utility.shared.fixChartScale(chart: content, item: maxData)
+        }
+    }
+}

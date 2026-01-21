@@ -144,5 +144,6 @@ private extension ViewController {
         ]
         
         pointCharts.delegate = self
+        pointCharts.updateChart()
     }
 }

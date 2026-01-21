@@ -18,6 +18,8 @@ public extension WWSwiftUI {
         
         public init() {}
         
+        /// 求出最大項目
+        /// - Returns: T?
         public func maxData() -> T? {
             return data.max(by: { $0.value < $1.value })
         }
@@ -29,6 +31,8 @@ public extension WWSwiftUI {
         
         public init() {}
         
+        /// 求出最大項目
+        /// - Returns: T?
         public func maxData() -> T.Data? {
             
             let maxData = data.compactMap { _data_ in
@@ -44,18 +48,21 @@ public extension WWSwiftUI {
         @Published public var data: [T] = []
         
         public init() {}
+        
+        /// 求出最大項目
+        /// - Returns: T?
+        public func maxData() -> T? {
+            return data.max(by: { $0.yValue < $1.yValue })
+        }
     }
 }
 
 // MARK: - Delegate模型
 extension WWSwiftUI {
     
-    class BarMarkViewDelegateModel: ObservableObject {
+    class BarMarkViewDelegateModel: BaseViewDelegateModel {
         
         @Published var delegate: WWSwiftUI.BarMarkViewDelegate?
-        @Published var progress: Double = 1.00
-        
-        init() {}
         
         /// 設定Delegate (觸發 @ObservedObject)
         /// - Parameter delegate: WWSwiftUI.BarMarkViewDelegate?
@@ -63,29 +70,11 @@ extension WWSwiftUI {
             self.delegate = delegate
             objectWillChange.send()
         }
-        
-        /// 圖表動畫 (0% ~ 100%)
-        /// - Parameter animation: Animation
-        func updateChart(animation: Animation) {
-            
-            progress = 0.0
-            
-            Task { @MainActor in
-                
-                let transaction = Transaction(animation: animation)
-                
-                try await Task.sleep(for: .milliseconds(100))
-                withTransaction(transaction) { [unowned self] in progress = 1.0 }
-            }
-        }
     }
     
-    class LineMarkViewDelegateModel: ObservableObject {
+    class LineMarkViewDelegateModel: BaseViewDelegateModel {
         
         @Published var delegate: WWSwiftUI.LineMarkViewDelegate?
-        @Published var progress: Double = 1.00
-
-        init() {}
         
         /// 設定Delegate (觸發 @ObservedObject)
         /// - Parameter delegate: WWSwiftUI.LineMarkViewDelegate?
@@ -93,6 +82,29 @@ extension WWSwiftUI {
             self.delegate = delegate
             objectWillChange.send()
         }
+    }
+    
+    class PointMarkViewDelegateModel: BaseViewDelegateModel {
+        
+        @Published var delegate: WWSwiftUI.PointMarkViewDelegate?
+                
+        /// 設定Delegate (觸發 @ObservedObject)
+        /// - Parameter delegate: WWSwiftUI.PointMarkViewDelegate?
+        func setDelegate(_ delegate: WWSwiftUI.PointMarkViewDelegate?) {
+            self.delegate = delegate
+            objectWillChange.send()
+        }
+    }
+}
+
+// MARK: - Delegate模型
+extension WWSwiftUI {
+        
+    class BaseViewDelegateModel: ObservableObject {
+        
+        @Published var progress: Double = 1.00
+        
+        init() {}
         
         /// 圖表動畫 (0% ~ 100%)
         /// - Parameter animation: Animation
@@ -107,20 +119,6 @@ extension WWSwiftUI {
                 try await Task.sleep(for: .milliseconds(100))
                 withTransaction(transaction) { [unowned self] in progress = 1.0 }
             }
-        }
-    }
-    
-    class PointMarkViewDelegateModel: ObservableObject {
-        
-        @Published var delegate: WWSwiftUI.PointMarkViewDelegate?
-        
-        init() {}
-        
-        /// 設定Delegate (觸發 @ObservedObject)
-        /// - Parameter delegate: WWSwiftUI.PointMarkViewDelegate?
-        func setDelegate(_ delegate: WWSwiftUI.PointMarkViewDelegate?) {
-            self.delegate = delegate
-            objectWillChange.send()
         }
     }
 }

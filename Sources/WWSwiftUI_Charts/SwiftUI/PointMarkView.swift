@@ -16,7 +16,7 @@ public extension WWSwiftUI {
         
         @ObservedObject var model: PointMarkViewModel<T>
         @ObservedObject var viewDelegateModel: PointMarkViewDelegateModel
-
+        
         private let fieldKey = (label: "Label", xAxis: "X-axis", yAxis: "Y-axis")
         private let symbolSize: CGFloat
         private let useAnnotation: Bool
@@ -46,12 +46,15 @@ public extension WWSwiftUI {
         public var body: some View {
             
             Chart(model.data) { point in
-                pointMarkMaker(point: point)
+                pointMarkMaker(point: point, progress: viewDelegateModel.progress)
                     .symbol(by: .value(fieldKey.label, point.label))
                     .symbolSize(symbolSize)
                     .foregroundStyle(by: .value(fieldKey.label, point.label))
                     ._if(useAnnotation) { $0._annotation(value: point.xValue, font: .caption2, foregroundStyle: .primary) }
-            }._if(viewDelegateModel.delegate != nil) { $0._chartOverlayOnTap { viewDelegateModel.delegate?.pointMarkView(self, proxy: $0, didSelected: $1) }}
+            }._if(viewDelegateModel.delegate != nil) {
+                $0._chartOverlayOnTap { viewDelegateModel.delegate?.pointMarkView(self, proxy: $0, didSelected: $1) }
+                    .modifier(PointScaleModifier(maxData: model.maxData()))
+            }
             .background(.clear)
             .padding()
         }
@@ -64,9 +67,13 @@ private extension WWSwiftUI.PointMarkView {
     /// 根據方向決定柱狀圖的x,y軸顯示
     /// - Parameters:
     ///   - item: <WWSwiftUI.BarMarkDataProtocol>
-    ///   - orientation: 方向 (水平 / 垂直)
+    ///   - progress: 進度動畫 (0% ~ 100%)
     /// - Returns: BarMark
-    func pointMarkMaker<T: WWSwiftUI.PointMarkValueProtocol>(point: T) -> PointMark {
-        return PointMark(x: .value(fieldKey.xAxis, point.xValue), y: .value(fieldKey.yAxis, point.yValue))
+    func pointMarkMaker<T: WWSwiftUI.PointMarkValueProtocol>(point: T, progress: Double) -> PointMark {
+        
+        let xValue = point.xValue._animatedValue(progress: progress)
+        let yValue = point.yValue._animatedValue(progress: progress)
+        
+        return PointMark(x: .value(fieldKey.xAxis, xValue), y: .value(fieldKey.yAxis, yValue))
     }
 }
