@@ -8,6 +8,7 @@
 import SwiftUI
 import WWSwiftUI_MultiDatePicker
 import WWSwiftUI_Charts
+import Charts
 
 // MARK: - 資料模型 (泛型)
 public extension WWSwiftUI {
@@ -75,11 +76,19 @@ extension WWSwiftUI {
     class LineMarkViewDelegateModel: BaseViewDelegateModel {
         
         @Published var delegate: WWSwiftUI.LineMarkViewDelegate?
+        @Published var interpolationMethod: InterpolationMethod = .linear
         
         /// 設定Delegate (觸發 @ObservedObject)
         /// - Parameter delegate: WWSwiftUI.LineMarkViewDelegate?
         func setDelegate(_ delegate: WWSwiftUI.LineMarkViewDelegate?) {
             self.delegate = delegate
+            objectWillChange.send()
+        }
+        
+        /// 設定曲線插值選項 (產生平滑曲線效果)
+        /// - Parameter method: InterpolationMethod?
+        func setInterpolationMethod(_ method: InterpolationMethod) {
+            self.interpolationMethod = method
             objectWillChange.send()
         }
     }

@@ -29,12 +29,14 @@ public extension WWSwiftUI {
         ///   - useAnnotation: 是否顯示數值文字
         ///   - unit: 日期單位
         ///   - orientation: 方向 (水平 / 垂直)
-        public init<T>(model: LineMarkViewModel<T>, lineWidth: CGFloat = 1, lineColors: [Color] = [], useAnnotation: Bool = false, unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical) {
+        ///   - interpolationMethod: 設定曲線插值選項 (產生平滑曲線效果)
+        public init<T>(model: LineMarkViewModel<T>, lineWidth: CGFloat = 1, lineColors: [Color] = [], useAnnotation: Bool = false, unit: Calendar.Component = .day, orientation: NSLayoutConstraint.Axis = .vertical, interpolationMethod: InterpolationMethod = .linear) {
             
             let rootView = WWSwiftUI.LineMarkView(model: model, viewDelegateModel: viewDelegateModel, lineWidth: lineWidth, lineColors: lineColors, useAnnotation: useAnnotation, unit: unit, orientation: orientation)
             
             hostingController = UIHostingController(rootView: AnyView(rootView))
             viewDelegateModel.setDelegate(self)
+            viewDelegateModel.setInterpolationMethod(interpolationMethod)
         }
         
         deinit {

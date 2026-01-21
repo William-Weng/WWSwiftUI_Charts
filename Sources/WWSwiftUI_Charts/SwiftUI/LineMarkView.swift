@@ -65,6 +65,7 @@ public extension WWSwiftUI {
                         .lineStyle(StrokeStyle(lineWidth: lineWidth))
                         .foregroundStyle(by: .value(fieldKey.label, series.label))
                         .symbol(by: .value(fieldKey.label, series.label))
+                        .interpolationMethod(viewDelegateModel.interpolationMethod)
 
                     if (useAnnotation) { pointMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation, unit: unit) }
                 }
