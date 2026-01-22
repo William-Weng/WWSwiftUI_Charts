@@ -68,11 +68,12 @@ public extension WWSwiftUI {
                         .interpolationMethod(viewDelegateModel.interpolationMethod)
 
                     if (useAnnotation) { pointMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation, unit: unit) }
+                    if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: orientation) }
                 }
             }
-            ._if(!lineColors.isEmpty) { chart in
-                chart.chartForegroundStyleScale(range: lineColors)
-                     .chartLegend(.visible)
+            ._if(!lineColors.isEmpty) {
+                $0.chartForegroundStyleScale(range: lineColors)
+                  .chartLegend(.visible)
             }
             ._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }

@@ -7,6 +7,13 @@
 
 import Foundation
 import WWSwiftUI_MultiDatePicker
+import SwiftUICore
+
+// MARK: - WWSwiftUI
+public extension WWSwiftUI {
+    
+    typealias ChartGuideLine = (value: Double, color: Color, style: StrokeStyle)     // (數值, 顏色, 樣式)
+}
 
 // MARK: - WWSwiftUI
 public extension WWSwiftUI {

@@ -70,4 +70,25 @@ extension Utility {
                  .chartYScale(domain: 0...intValueY)
         }
     }
+    
+    /// 繪出輔助線
+    /// - Parameters:
+    ///   - guideLine: WWSwiftUI.ChartGuideLine
+    ///   - key: String
+    ///   - orientation: 方向 (水平 / 垂直)
+    /// - Returns: ChartContent
+    func guideLineMaker(_ guideLine: WWSwiftUI.ChartGuideLine, key: String = "Guide", orientation: NSLayoutConstraint.Axis) -> some ChartContent {
+        
+        switch orientation {
+        case .horizontal:
+            RuleMark(x: .value(key, guideLine.value))
+                .foregroundStyle(guideLine.color)
+                .lineStyle(guideLine.style)
+        case .vertical:
+            RuleMark(y: .value(key, guideLine.value))
+                .foregroundStyle(guideLine.color)
+                .lineStyle(guideLine.style)
+        }
+    }
 }
+

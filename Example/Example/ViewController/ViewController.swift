@@ -101,6 +101,7 @@ private extension ViewController {
         barViewModel.data = stepsData
         barCharts.delegate = self
         barCharts.updateChart()
+        barCharts.updateGuideLine(value: 4000)
     }
     
     func lineChartSetting() {
@@ -131,6 +132,7 @@ private extension ViewController {
         
         lineCharts.delegate = self
         lineCharts.updateChart()
+        lineCharts.updateGuideLine(value: 25)
     }
     
     func pointChartSetting() {
@@ -145,5 +147,6 @@ private extension ViewController {
         
         pointCharts.delegate = self
         pointCharts.updateChart()
+        pointCharts.updateGuideLine(value: 20)
     }
 }

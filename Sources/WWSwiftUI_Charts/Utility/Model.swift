@@ -63,24 +63,31 @@ extension WWSwiftUI {
     
     class BarMarkViewDelegateModel: BaseViewDelegateModel {
         
-        @Published var delegate: WWSwiftUI.BarMarkViewDelegate?
+        @Published var delegate: BarMarkViewDelegate?
         
         /// 設定Delegate (觸發 @ObservedObject)
-        /// - Parameter delegate: WWSwiftUI.BarMarkViewDelegate?
-        func setDelegate(_ delegate: WWSwiftUI.BarMarkViewDelegate?) {
+        /// - Parameter delegate: BarMarkViewDelegate?
+        func setDelegate(_ delegate: BarMarkViewDelegate?) {
             self.delegate = delegate
+            objectWillChange.send()
+        }
+        
+        /// 設定輔助線
+        /// - Parameter guideLine: ChartGuideLine?
+        func setGuideLine(_ guideLine: ChartGuideLine?) {
+            self.guideLine = guideLine
             objectWillChange.send()
         }
     }
     
     class LineMarkViewDelegateModel: BaseViewDelegateModel {
         
-        @Published var delegate: WWSwiftUI.LineMarkViewDelegate?
+        @Published var delegate: LineMarkViewDelegate?
         @Published var interpolationMethod: InterpolationMethod = .linear
         
         /// 設定Delegate (觸發 @ObservedObject)
-        /// - Parameter delegate: WWSwiftUI.LineMarkViewDelegate?
-        func setDelegate(_ delegate: WWSwiftUI.LineMarkViewDelegate?) {
+        /// - Parameter delegate: LineMarkViewDelegate?
+        func setDelegate(_ delegate: LineMarkViewDelegate?) {
             self.delegate = delegate
             objectWillChange.send()
         }
@@ -91,24 +98,40 @@ extension WWSwiftUI {
             self.interpolationMethod = method
             objectWillChange.send()
         }
+        
+        /// 設定輔助線
+        /// - Parameter guideLine: ChartGuideLine?
+        func setGuideLine(_ guideLine: ChartGuideLine?) {
+            self.guideLine = guideLine
+            objectWillChange.send()
+        }
     }
     
     class PointMarkViewDelegateModel: BaseViewDelegateModel {
         
-        @Published var delegate: WWSwiftUI.PointMarkViewDelegate?
-        @Published var displayMode: WWSwiftUI.PointMarkDisplayMode = .full
-        
+        @Published var delegate: PointMarkViewDelegate?
+        @Published var displayMode: PointMarkDisplayMode = .full
+        @Published var orientation: NSLayoutConstraint.Axis = .vertical
+
         /// 設定Delegate (觸發 @ObservedObject)
-        /// - Parameter delegate: WWSwiftUI.PointMarkViewDelegate?
-        func setDelegate(_ delegate: WWSwiftUI.PointMarkViewDelegate?) {
+        /// - Parameter delegate: PointMarkViewDelegate?
+        func setDelegate(_ delegate: PointMarkViewDelegate?) {
             self.delegate = delegate
             objectWillChange.send()
         }
         
         /// 設定顯示模式
-        /// - Parameter displayMode: WWSwiftUI.PointMarkDisplayMode
-        func setDisplayMode(_ displayMode: WWSwiftUI.PointMarkDisplayMode) {
+        /// - Parameter displayMode: PointMarkDisplayMode
+        func setDisplayMode(_ displayMode: PointMarkDisplayMode) {
             self.displayMode = displayMode
+            objectWillChange.send()
+        }
+        
+        /// 設定輔助線
+        /// - Parameter guideLine: ChartGuideLine?
+        func setGuideLine(_ guideLine: ChartGuideLine?, orientation: NSLayoutConstraint.Axis) {
+            self.guideLine = guideLine
+            self.orientation = orientation
             objectWillChange.send()
         }
     }
@@ -120,6 +143,7 @@ extension WWSwiftUI {
     class BaseViewDelegateModel: ObservableObject {
         
         @Published var progress: Double = 1.00
+        @Published var guideLine: ChartGuideLine?
         
         init() {}
         

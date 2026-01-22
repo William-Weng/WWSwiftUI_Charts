@@ -52,7 +52,7 @@ public extension WWSwiftUI {
         }
         
         public var body: some View {
-            
+                            
             Chart(model.data) { item in
                 
                 let index = model.data.firstIndex(where: { $0.id == item.id }) ?? 0
@@ -61,8 +61,10 @@ public extension WWSwiftUI {
                     ._if(!barColors.isEmpty) { $0.foregroundStyle(barColors[index % barColors.count]) }
                     ._if(useAnnotation) { $0._annotation(value: item.value, font: .caption2, foregroundStyle : .primary) }
                     .foregroundStyle(by: .value(fieldKey.label, item.label))
-            }
-            ._if(viewDelegateModel.delegate != nil) {
+                
+                if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: orientation) }
+                
+            }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.barMarkView(self, proxy: $0, didSelected: $1) }
                   .modifier(BarScaleModifier(maxData: model.maxData(), orientation: orientation))
             }

@@ -57,6 +57,22 @@ public extension WWSwiftUI.LineMark {
     func updateChart(animation: Animation = .easeOut(duration: 0.5)) {
         viewDelegateModel.updateChart(animation: animation)
     }
+    
+    /// 更新輔助線數值
+    /// - Parameters:
+    ///   - value: 數值
+    ///   - color: 顏色
+    ///   - style: 類型
+    func updateGuideLine(value: Double, color: Color = .gray, style: StrokeStyle = .init(dash: [5])) {
+        
+        let guideLine: WWSwiftUI.ChartGuideLine = (
+            value: value,
+            color: color,
+            style: style
+        )
+        
+        viewDelegateModel.setGuideLine(guideLine)
+    }
 }
 
 // MARK: - WWSwiftUI.LineMarkViewDelegate
