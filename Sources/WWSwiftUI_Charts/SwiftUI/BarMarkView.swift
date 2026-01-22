@@ -60,6 +60,7 @@ public extension WWSwiftUI {
                 barMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation)
                     ._if(!barColors.isEmpty) { $0.foregroundStyle(barColors[index % barColors.count]) }
                     ._if(useAnnotation) { $0._annotation(value: item.value, font: .caption2, foregroundStyle : .primary) }
+                    .foregroundStyle(by: .value(fieldKey.label, item.label))
             }
             ._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.barMarkView(self, proxy: $0, didSelected: $1) }
