@@ -70,6 +70,7 @@ public extension WWSwiftUI {
                     if (useAnnotation) { pointMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation, unit: unit) }
                     if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: orientation) }
                 }
+                
             }
             ._if(!lineColors.isEmpty) {
                 $0.chartForegroundStyleScale(range: lineColors)
