@@ -61,12 +61,10 @@ public extension WWSwiftUI {
                 
                 if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: orientation) }
                 
-            }
-            ._if(!barColors.isEmpty) {
+            }._if(!barColors.isEmpty) {
                 $0.chartForegroundStyleScale(range: barColors)
                   .chartLegend(.visible)
-            }
-            ._if(viewDelegateModel.delegate != nil) {
+            }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.barMarkView(self, proxy: $0, didSelected: $1) }
                   .modifier(BarScaleModifier(maxData: model.maxData(), orientation: orientation))
             }

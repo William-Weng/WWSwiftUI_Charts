@@ -64,13 +64,7 @@ public extension WWSwiftUI.PointMark {
     ///   - style: 類型
     ///   - orientation: 方向
     func updateGuideLine(value: Double, color: Color = .gray, style: StrokeStyle = .init(dash: [5]), orientation: NSLayoutConstraint.Axis = .vertical) {
-        
-        let guideLine: WWSwiftUI.ChartGuideLine = (
-            value: value,
-            color: color,
-            style: style
-        )
-        
+        let guideLine: WWSwiftUI.ChartGuideLine = (value: value, color: color, style: style)
         viewDelegateModel.setGuideLine(guideLine, orientation: orientation)
     }
 }

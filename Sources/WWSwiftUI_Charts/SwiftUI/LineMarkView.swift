@@ -71,14 +71,12 @@ public extension WWSwiftUI {
                     if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: orientation) }
                 }
                 
-            }
-            ._if(!lineColors.isEmpty) {
+            }._if(!lineColors.isEmpty) {
                 $0.chartForegroundStyleScale(range: lineColors)
                   .chartLegend(.visible)
-            }
-            ._if(viewDelegateModel.delegate != nil) {
+            }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }
-                    .modifier(LineScaleModifier(maxData: model.maxData(), orientation: orientation))
+                  .modifier(LineScaleModifier(maxData: model.maxData(), orientation: orientation))
             }
             .background(.clear)
             .padding()

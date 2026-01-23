@@ -13,7 +13,8 @@
 		812EA6CA2F230360003C8F81 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 812EA6C92F230360003C8F81 /* WWSwiftUI_Charts */; };
 		812EA6D02F2312A5003C8F81 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 812EA6CF2F2312A5003C8F81 /* WWSwiftUI_Charts */; };
 		812EA6D62F231643003C8F81 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 812EA6D52F231643003C8F81 /* WWSwiftUI_Charts */; };
-		812EA6D92F23165D003C8F81 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 812EA6D82F23165D003C8F81 /* WWSwiftUI_Charts */; };
+		812EA6DC2F231913003C8F81 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 812EA6DB2F231913003C8F81 /* WWSwiftUI_Charts */; };
+		812EA6DF2F2319A3003C8F81 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 812EA6DE2F2319A3003C8F81 /* WWSwiftUI_Charts */; };
 		813BEF612F20B224006FCC30 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 813BEF602F20B224006FCC30 /* WWSwiftUI_Charts */; };
 		813BEF672F20B988006FCC30 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 813BEF662F20B988006FCC30 /* WWSwiftUI_Charts */; };
 		813BEF6D2F20C130006FCC30 /* WWSwiftUI_Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 813BEF6C2F20C130006FCC30 /* WWSwiftUI_Charts */; };
@@ -75,6 +76,7 @@
 				811E70DF2F18EEF400805857 /* WWSwiftUI_Charts in Frameworks */,
 				81F6FE822F148FFB0018BDCC /* WWSwiftUI_Charts in Frameworks */,
 				8159AD532F21F3BD003DE5A4 /* WWSwiftUI_Charts in Frameworks */,
+				812EA6DF2F2319A3003C8F81 /* WWSwiftUI_Charts in Frameworks */,
 				8159AD4D2F21EF20003DE5A4 /* WWSwiftUI_Charts in Frameworks */,
 				819FA35E2F1792090026D732 /* WWSwiftUI_Charts in Frameworks */,
 				812EA6CA2F230360003C8F81 /* WWSwiftUI_Charts in Frameworks */,
@@ -84,7 +86,7 @@
 				813BEF612F20B224006FCC30 /* WWSwiftUI_Charts in Frameworks */,
 				813BEF672F20B988006FCC30 /* WWSwiftUI_Charts in Frameworks */,
 				8159AD592F2217D1003DE5A4 /* WWSwiftUI_Charts in Frameworks */,
-				812EA6D92F23165D003C8F81 /* WWSwiftUI_Charts in Frameworks */,
+				812EA6DC2F231913003C8F81 /* WWSwiftUI_Charts in Frameworks */,
 				819FA3582F178CA40026D732 /* WWSwiftUI_Charts in Frameworks */,
 				817F54AE2F15E2AD006BBADB /* WWSwiftUI_Charts in Frameworks */,
 			);
@@ -152,7 +154,8 @@
 				812EA6C92F230360003C8F81 /* WWSwiftUI_Charts */,
 				812EA6CF2F2312A5003C8F81 /* WWSwiftUI_Charts */,
 				812EA6D52F231643003C8F81 /* WWSwiftUI_Charts */,
-				812EA6D82F23165D003C8F81 /* WWSwiftUI_Charts */,
+				812EA6DB2F231913003C8F81 /* WWSwiftUI_Charts */,
+				812EA6DE2F2319A3003C8F81 /* WWSwiftUI_Charts */,
 			);
 			productName = Example;
 			productReference = 817EE1FE2EB1FA050036B57C /* Example.app */;
@@ -183,7 +186,7 @@
 			mainGroup = 817EE1F52EB1FA050036B57C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				812EA6D72F23165D003C8F81 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */,
+				812EA6DD2F2319A3003C8F81 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 817EE1FF2EB1FA050036B57C /* Products */;
@@ -427,7 +430,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		812EA6D72F23165D003C8F81 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */ = {
+		812EA6DD2F2319A3003C8F81 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWSwiftUI_Charts";
 			requirement = {
@@ -462,9 +465,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = WWSwiftUI_Charts;
 		};
-		812EA6D82F23165D003C8F81 /* WWSwiftUI_Charts */ = {
+		812EA6DB2F231913003C8F81 /* WWSwiftUI_Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 812EA6D72F23165D003C8F81 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */;
+			productName = WWSwiftUI_Charts;
+		};
+		812EA6DE2F2319A3003C8F81 /* WWSwiftUI_Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 812EA6DD2F2319A3003C8F81 /* XCRemoteSwiftPackageReference "WWSwiftUI_Charts" */;
 			productName = WWSwiftUI_Charts;
 		};
 		813BEF602F20B224006FCC30 /* WWSwiftUI_Charts */ = {

@@ -58,12 +58,10 @@ public extension WWSwiftUI {
                 
                 if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: viewDelegateModel.orientation) }
                 
-            }
-            ._if(!pointColors.isEmpty) {
+            }._if(!pointColors.isEmpty) {
                 $0.chartForegroundStyleScale(range: pointColors)
                   .chartLegend(.visible)
-            }
-            ._if(viewDelegateModel.delegate != nil) {
+            }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.pointMarkView(self, proxy: $0, didSelected: $1) }
                   .modifier(PointScaleModifier(maxData: model.maxData()))
             }
