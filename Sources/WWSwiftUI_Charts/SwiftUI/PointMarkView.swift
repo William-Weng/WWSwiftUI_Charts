@@ -20,14 +20,16 @@ public extension WWSwiftUI {
         private let fieldKey = (label: "Label", xAxis: "X-axis", yAxis: "Y-axis")
         private let symbolSize: CGFloat
         private let useAnnotation: Bool
+        private let pointColors: [Color]
         
         /// [初始化設定](https://www.swiftyplace.com/blog/swiftcharts-create-charts-and-graphs-in-swiftui)
         /// - Parameters:
         ///   - model: PointMarkViewModel<T>
         ///   - symbolSize: 散點的大小
+        ///   - pointColors: 散點的顏色
         ///   - useAnnotation: 是否顯示數值文字
-        public init(model: PointMarkViewModel<T>, symbolSize: CGFloat = 100, useAnnotation: Bool = false) {
-            self.init(model: model, viewDelegateModel: .init(), symbolSize: symbolSize, useAnnotation: useAnnotation)
+        public init(model: PointMarkViewModel<T>, symbolSize: CGFloat = 100, pointColors: [Color] = [], useAnnotation: Bool = false) {
+            self.init(model: model, viewDelegateModel: .init(), symbolSize: symbolSize, pointColors: pointColors, useAnnotation: useAnnotation)
         }
         
         /// 初始化設定
@@ -35,12 +37,14 @@ public extension WWSwiftUI {
         ///   - model: PointMarkViewModel<T>
         ///   - viewDelegateModel: PointMarkViewDelegateModel
         ///   - symbolSize: 散點的大小
+        ///   - pointColors: 散點的顏色
         ///   - useAnnotation: 是否顯示數值文字
-        init(model: PointMarkViewModel<T>, viewDelegateModel: PointMarkViewDelegateModel, symbolSize: CGFloat, useAnnotation: Bool) {
+        init(model: PointMarkViewModel<T>, viewDelegateModel: PointMarkViewDelegateModel, symbolSize: CGFloat, pointColors: [Color], useAnnotation: Bool) {
             self.model = model
             self.symbolSize = symbolSize
             self.useAnnotation = useAnnotation
             self.viewDelegateModel = viewDelegateModel
+            self.pointColors = pointColors
         }
         
         public var body: some View {
@@ -57,6 +61,9 @@ public extension WWSwiftUI {
             }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.pointMarkView(self, proxy: $0, didSelected: $1) }
                     .modifier(PointScaleModifier(maxData: model.maxData()))
+            }._if(!pointColors.isEmpty) {
+                $0.chartForegroundStyleScale(range: pointColors)
+                  .chartLegend(.visible)
             }
             .background(.clear)
             .padding()

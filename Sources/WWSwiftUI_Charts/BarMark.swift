@@ -29,7 +29,7 @@ public extension WWSwiftUI {
         ///   - barColors: 柱狀圖的顏色
         ///   - useAnnotation: 是否顯示數值文字
         ///   - orientation: 方向 (水平 / 垂直)
-        public init<T>(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [.blue], useAnnotation: Bool = false, orientation: NSLayoutConstraint.Axis = .vertical) {
+        public init<T>(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [], useAnnotation: Bool = false, orientation: NSLayoutConstraint.Axis = .vertical) {
             
             let rootView = WWSwiftUI.BarMarkView(model: model, viewDelegateModel: viewDelegateModel, barWidth: barWidth, barColors: barColors, useAnnotation: useAnnotation, orientation: orientation)
             

@@ -30,7 +30,7 @@ public extension WWSwiftUI {
         ///   - barColors: 柱狀圖的數值顏色
         ///   - useAnnotation: 是否顯示數值文字
         ///   - orientation: 方向 (水平 / 垂直)
-        public init(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [.blue], useAnnotation: Bool = false, orientation: NSLayoutConstraint.Axis = .vertical) {
+        public init(model: BarMarkViewModel<T>, barWidth: MarkDimension = .automatic, barColors: [Color] = [], useAnnotation: Bool = false, orientation: NSLayoutConstraint.Axis = .vertical) {
             self.init(model: model, viewDelegateModel: .init(), barWidth: barWidth, barColors: barColors, useAnnotation: useAnnotation, orientation: orientation)
         }
         
@@ -58,7 +58,6 @@ public extension WWSwiftUI {
                 let index = model.data.firstIndex(where: { $0.id == item.id }) ?? 0
                 
                 barMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation)
-                    ._if(!barColors.isEmpty) { $0.foregroundStyle(barColors[index % barColors.count]) }
                     ._if(useAnnotation) { $0._annotation(value: item.value, font: .caption2, foregroundStyle : .primary) }
                     .foregroundStyle(by: .value(fieldKey.label, item.label))
                 
@@ -67,6 +66,9 @@ public extension WWSwiftUI {
             }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.barMarkView(self, proxy: $0, didSelected: $1) }
                   .modifier(BarScaleModifier(maxData: model.maxData(), orientation: orientation))
+            }._if(!barColors.isEmpty) {
+                $0.chartForegroundStyleScale(range: barColors)
+                  .chartLegend(.visible)
             }
             .background(.clear)
             .padding()

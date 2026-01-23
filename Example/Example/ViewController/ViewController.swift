@@ -66,11 +66,8 @@ extension ViewController: WWSwiftUI.PointMarkDelegate {
 private extension ViewController {
     
     func initBarChart() {
-        
-        let barColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
-        
         barViewModel.data = [.init(label: "Sun", value: 5900)]
-        barCharts = .init(model: barViewModel, barColors: barColors, useAnnotation: true)
+        barCharts = .init(model: barViewModel, useAnnotation: true)
         barCharts.move(toParent: self, on: barChartsView)
     }
     

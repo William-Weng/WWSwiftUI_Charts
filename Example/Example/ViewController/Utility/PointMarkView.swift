@@ -40,7 +40,10 @@ struct SwiftUIView3: View {
     ]
     
     var body: some View {
-        WWSwiftUI.PointMarkView(model: viewModel, useAnnotation: true)
+        
+        let pointColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
+        
+        WWSwiftUI.PointMarkView(model: viewModel, pointColors: pointColors, useAnnotation: true)
             .onAppear() {
                 viewModel.data = pointsData
             }
