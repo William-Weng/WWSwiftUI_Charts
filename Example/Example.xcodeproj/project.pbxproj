@@ -441,7 +441,7 @@
 			repositoryURL = "https://github.com/William-Weng/WWSwiftUI_Charts";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.8;
+				minimumVersion = 1.2.9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
