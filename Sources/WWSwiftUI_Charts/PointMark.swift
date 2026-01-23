@@ -67,6 +67,12 @@ public extension WWSwiftUI.PointMark {
         let guideLine: WWSwiftUI.ChartGuideLine = (value: value, color: color, style: style)
         viewDelegateModel.setGuideLine(guideLine, orientation: orientation)
     }
+    
+    /// 更新標線最大值
+    /// - Parameter pointScale: PointScale?
+    func updateMaxScale(_ pointScale: WWSwiftUI.PointScale) {
+        viewDelegateModel.maxPointScale = pointScale
+    }
 }
 
 // MARK: - WWSwiftUI.PointMarkViewDelegate

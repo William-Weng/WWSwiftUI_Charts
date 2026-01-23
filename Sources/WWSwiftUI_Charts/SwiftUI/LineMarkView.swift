@@ -76,7 +76,7 @@ public extension WWSwiftUI {
                   .chartLegend(.visible)
             }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.lineMarkView(self, proxy: $0, didSelected: $1) }
-                  .modifier(LineScaleModifier(maxData: model.maxData(), orientation: orientation))
+                  .modifier(LineScaleModifier(maxData: model.maxData(), orientation: orientation, maxScale: viewDelegateModel.maxScale))
             }
             .background(.clear)
             .padding()

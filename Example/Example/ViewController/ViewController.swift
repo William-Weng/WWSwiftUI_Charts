@@ -99,6 +99,7 @@ private extension ViewController {
         barCharts.delegate = self
         barCharts.updateChart()
         barCharts.updateGuideLine(value: 4000)
+        barCharts.updateMaxScale(15000)
     }
     
     func lineChartSetting() {
@@ -130,6 +131,7 @@ private extension ViewController {
         lineCharts.delegate = self
         lineCharts.updateChart()
         lineCharts.updateGuideLine(value: 25)
+        lineCharts.updateMaxScale(60)
     }
     
     func pointChartSetting() {
@@ -145,5 +147,6 @@ private extension ViewController {
         pointCharts.delegate = self
         pointCharts.updateChart()
         pointCharts.updateGuideLine(value: 20)
+        pointCharts.updateMaxScale(.init(x: nil, y: 60))
     }
 }

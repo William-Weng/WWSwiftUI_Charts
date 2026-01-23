@@ -66,7 +66,7 @@ public extension WWSwiftUI {
                   .chartLegend(.visible)
             }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.barMarkView(self, proxy: $0, didSelected: $1) }
-                  .modifier(BarScaleModifier(maxData: model.maxData(), orientation: orientation))
+                  .modifier(BarScaleModifier(maxData: model.maxData(), orientation: orientation, maxScale: viewDelegateModel.maxScale))
             }
             .background(.clear)
             .padding()

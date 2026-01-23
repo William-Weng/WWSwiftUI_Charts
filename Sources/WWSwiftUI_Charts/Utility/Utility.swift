@@ -19,6 +19,26 @@ final class Utility {
 // MARK: - 小工具
 extension Utility {
     
+    /// 設定軸上圖表尺規的最大值 (防止尺規產生動畫)
+    /// - Parameters:
+    ///   - chart: some View
+    ///   - intValue: 設定值
+    ///   - orientation: 方向
+    /// - Returns: some View
+    func setChartScale(chart: some View, intValue: Int, orientation: NSLayoutConstraint.Axis) -> some View {
+        
+        return Group {
+            switch orientation {
+            case .horizontal:
+                chart.chartYAxis { AxisMarks(values: .automatic) }
+                     .chartXScale(domain: 0...intValue)
+            case .vertical:
+                chart.chartXAxis { AxisMarks(values: .automatic) }
+                     .chartYScale(domain: 0...intValue)
+            }
+        }
+    }
+    
     /// 修正軸上圖表尺規的最大值 (防止尺規產生動畫)
     /// - Parameters:
     ///   - chart: some View
@@ -36,13 +56,11 @@ extension Utility {
             
             switch orientation {
             case .horizontal:
-                chart
-                    .chartYAxis { AxisMarks(values: .automatic) }
-                    .chartXScale(domain: 0...intValue)
+                chart.chartYAxis { AxisMarks(values: .automatic) }
+                     .chartXScale(domain: 0...intValue)
             case .vertical:
-                chart
-                    .chartXAxis { AxisMarks(values: .automatic) }
-                    .chartYScale(domain: 0...intValue)
+                chart.chartXAxis { AxisMarks(values: .automatic) }
+                     .chartYScale(domain: 0...intValue)
             }
         }
     }
@@ -51,8 +69,9 @@ extension Utility {
     /// - Parameters:
     ///   - chart: some View
     ///   - item: T?
+    ///   - pointScale: WWSwiftUI.PointScale
     /// - Returns: some View
-    func fixChartScale<T: WWSwiftUI.PointMarkValueProtocol>(chart: some View, item: T?) -> some View {
+    func fixChartScale<T: WWSwiftUI.PointMarkValueProtocol>(chart: some View, item: T?, pointScale: WWSwiftUI.PointScale) -> some View {
         
         var intValueX: Int = 0
         var intValueY: Int = 0
@@ -66,8 +85,8 @@ extension Utility {
         if let value = item?.yValue as? Double { intValueY = Int(value)._adjustedNumber() }
         
         return Group {
-            chart.chartXScale(domain: 0...intValueX)
-                 .chartYScale(domain: 0...intValueY)
+            chart.chartXScale(domain: 0...(pointScale.x ?? intValueX))
+                 .chartYScale(domain: 0...(pointScale.y ?? intValueY))
         }
     }
     
@@ -91,4 +110,3 @@ extension Utility {
         }
     }
 }
-

@@ -12,7 +12,23 @@ import SwiftUICore
 // MARK: - WWSwiftUI
 public extension WWSwiftUI {
     
-    typealias ChartGuideLine = (value: Double, color: Color, style: StrokeStyle)     // (數值, 顏色, 樣式)
+    /// x, y軸數值
+    struct PointScale {
+        
+        let x: Int?
+        let y: Int?
+        
+        public init(x: Int?, y: Int?) {
+            self.x = x
+            self.y = y
+        }
+    }
+}
+
+// MARK: - WWSwiftUI
+public extension WWSwiftUI {
+    
+    typealias ChartGuideLine = (value: Double, color: Color, style: StrokeStyle)    // (數值, 顏色, 樣式)
 }
 
 // MARK: - WWSwiftUI

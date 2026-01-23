@@ -64,7 +64,8 @@ extension WWSwiftUI {
     class BarMarkViewDelegateModel: BaseViewDelegateModel {
         
         @Published var delegate: BarMarkViewDelegate?
-        
+        @Published var maxScale: Int?
+
         /// 設定Delegate (觸發 @ObservedObject)
         /// - Parameter delegate: BarMarkViewDelegate?
         func setDelegate(_ delegate: BarMarkViewDelegate?) {
@@ -78,13 +79,21 @@ extension WWSwiftUI {
             self.guideLine = guideLine
             objectWillChange.send()
         }
+        
+        /// 更新標線最大值
+        /// - Parameter maxScale: Int
+        func updateMaxScale(_ maxScale: Int?) {
+            self.maxScale = maxScale
+            objectWillChange.send()
+        }
     }
     
     class LineMarkViewDelegateModel: BaseViewDelegateModel {
         
         @Published var delegate: LineMarkViewDelegate?
         @Published var interpolationMethod: InterpolationMethod = .linear
-        
+        @Published var maxScale: Int?
+
         /// 設定Delegate (觸發 @ObservedObject)
         /// - Parameter delegate: LineMarkViewDelegate?
         func setDelegate(_ delegate: LineMarkViewDelegate?) {
@@ -105,6 +114,13 @@ extension WWSwiftUI {
             self.guideLine = guideLine
             objectWillChange.send()
         }
+        
+        /// 更新標線最大值
+        /// - Parameter maxScale: Int
+        func updateMaxScale(_ maxScale: Int?) {
+            self.maxScale = maxScale
+            objectWillChange.send()
+        }
     }
     
     class PointMarkViewDelegateModel: BaseViewDelegateModel {
@@ -112,7 +128,8 @@ extension WWSwiftUI {
         @Published var delegate: PointMarkViewDelegate?
         @Published var displayMode: PointMarkDisplayMode = .full
         @Published var orientation: NSLayoutConstraint.Axis = .vertical
-
+        @Published var maxPointScale: PointScale = .init(x: nil, y: nil)
+        
         /// 設定Delegate (觸發 @ObservedObject)
         /// - Parameter delegate: PointMarkViewDelegate?
         func setDelegate(_ delegate: PointMarkViewDelegate?) {
@@ -132,6 +149,13 @@ extension WWSwiftUI {
         func setGuideLine(_ guideLine: ChartGuideLine?, orientation: NSLayoutConstraint.Axis) {
             self.guideLine = guideLine
             self.orientation = orientation
+            objectWillChange.send()
+        }
+        
+        /// 更新標線最大值
+        /// - Parameter pointScale: PointScale?
+        func updateMaxScale(_ pointScale: PointScale) {
+            self.maxPointScale = pointScale
             objectWillChange.send()
         }
     }

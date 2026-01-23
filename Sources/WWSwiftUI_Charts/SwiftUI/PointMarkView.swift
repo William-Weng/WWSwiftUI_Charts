@@ -63,7 +63,7 @@ public extension WWSwiftUI {
                   .chartLegend(.visible)
             }._if(viewDelegateModel.delegate != nil) {
                 $0._chartOverlayOnTap { viewDelegateModel.delegate?.pointMarkView(self, proxy: $0, didSelected: $1) }
-                  .modifier(PointScaleModifier(maxData: model.maxData()))
+                  .modifier(PointScaleModifier(maxData: model.maxData(), maxPointScale: viewDelegateModel.maxPointScale))
             }
             .background(.clear)
             .padding()

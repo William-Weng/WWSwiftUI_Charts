@@ -16,9 +16,15 @@ extension WWSwiftUI {
         
         let maxData: T?
         let orientation: NSLayoutConstraint.Axis
+        let maxScale: Int?
         
         func body(content: Content) -> some View {
-            Utility.shared.fixChartScale(chart: content, value: maxData?.value, orientation: orientation)
+            
+            if let maxScale = maxScale {
+                Utility.shared.setChartScale(chart: content, intValue: maxScale, orientation: orientation)
+            } else {
+                Utility.shared.fixChartScale(chart: content, value: maxData?.value, orientation: orientation)
+            }
         }
     }
 }
@@ -30,9 +36,15 @@ extension WWSwiftUI {
         
         let maxData: T?
         let orientation: NSLayoutConstraint.Axis
+        let maxScale: Int?
         
         func body(content: Content) -> some View {
-            Utility.shared.fixChartScale(chart: content, value: maxData?.value, orientation: orientation)
+            
+            if let maxScale = maxScale {
+                Utility.shared.setChartScale(chart: content, intValue: maxScale, orientation: orientation)
+            } else {
+                Utility.shared.fixChartScale(chart: content, value: maxData?.value, orientation: orientation)
+            }
         }
     }
 }
@@ -43,9 +55,10 @@ extension WWSwiftUI {
     struct PointScaleModifier<T: WWSwiftUI.PointMarkValueProtocol>: ViewModifier {
         
         let maxData: T?
+        let maxPointScale: PointScale
         
         func body(content: Content) -> some View {
-            Utility.shared.fixChartScale(chart: content, item: maxData)
+            Utility.shared.fixChartScale(chart: content, item: maxData, pointScale: maxPointScale)
         }
     }
 }

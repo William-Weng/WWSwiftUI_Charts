@@ -65,6 +65,12 @@ public extension WWSwiftUI.BarMark {
         let guideLine: WWSwiftUI.ChartGuideLine = (value: value, color: color, style: style)
         viewDelegateModel.setGuideLine(guideLine)
     }
+    
+    /// 更新標線最大值
+    /// - Parameter maxScale: Int?
+    func updateMaxScale(_ maxScale: Int?) {
+        viewDelegateModel.updateMaxScale(maxScale)
+    }
 }
 
 // MARK: - WWSwiftUI.BarMarkViewDelegate
