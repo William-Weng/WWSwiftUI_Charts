@@ -56,7 +56,7 @@ public extension WWSwiftUI {
             Chart(model.data) { item in
                                 
                 barMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation)
-                    ._if(useAnnotation) { $0._annotation(value: item.value, font: .caption2, foregroundStyle : .primary) }
+                    ._if(useAnnotation) { $0._annotation(value: item.value, font: .caption2, style : .primary) }
                     .foregroundStyle(by: .value(fieldKey.label, item.label))
                 
                 if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: orientation) }

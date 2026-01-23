@@ -66,11 +66,14 @@ public extension WWSwiftUI {
                         .foregroundStyle(by: .value(fieldKey.label, series.label))
                         .symbol(by: .value(fieldKey.label, series.label))
                         .interpolationMethod(viewDelegateModel.interpolationMethod)
-
-                    if (useAnnotation) { pointMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation, unit: unit) }
+                    
+                    if (useAnnotation) {
+                        pointMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation, unit: unit)
+                            .foregroundStyle(by: .value(fieldKey.label, series.label))
+                    }
+                    
                     if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: orientation) }
                 }
-                
             }._if(!lineColors.isEmpty) {
                 $0.chartForegroundStyleScale(range: lineColors)
                   .chartLegend(.visible)
@@ -121,7 +124,7 @@ private extension WWSwiftUI.LineMarkView {
         case .vertical: pointMark = PointMark(x: .value(fieldKey.label, item.date, unit: unit), y: .value(fieldKey.value, value))
         }
         
-        let content = pointMark._annotation(value: item.value, font: .caption2, foregroundStyle: .primary)
+        let content = pointMark._annotation(value: item.value, font: .caption2, style: .primary)
         return content
     }
 }

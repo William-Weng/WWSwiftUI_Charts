@@ -54,7 +54,7 @@ public extension WWSwiftUI {
                     .symbol(by: .value(fieldKey.label, point.label))
                     .symbolSize(symbolSize)
                     .foregroundStyle(by: .value(fieldKey.label, point.label))
-                    ._if(useAnnotation) { $0._annotation(value: formatValue(point, mode: viewDelegateModel.displayMode), font: .caption2, foregroundStyle: .primary) }
+                    ._if(useAnnotation) { $0._annotation(value: formatValue(point, mode: viewDelegateModel.displayMode), font: .caption2, style: .primary) }
                 
                 if let guideLine = viewDelegateModel.guideLine { Utility.shared.guideLineMaker(guideLine, orientation: viewDelegateModel.orientation) }
                 

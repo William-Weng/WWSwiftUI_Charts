@@ -42,12 +42,12 @@ extension ChartContent {
     ///   - font: 字型
     ///   - foregroundStyle: 文字類型
     /// - Returns: ChartContent
-    func _annotation(value: Any, font: Font?, foregroundStyle: HierarchicalShapeStyle) -> some ChartContent {
+    func _annotation<S: ShapeStyle>(value: Any, font: Font?, style: S) -> some ChartContent {
         
         annotation(position: .automatic) {
             Text("\(value)")
                 .font(font)
-                .foregroundStyle(foregroundStyle)
+                .foregroundStyle(style)
         }
     }
 }
