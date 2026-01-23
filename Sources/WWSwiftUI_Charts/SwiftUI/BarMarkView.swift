@@ -54,9 +54,7 @@ public extension WWSwiftUI {
         public var body: some View {
                             
             Chart(model.data) { item in
-                
-                let index = model.data.firstIndex(where: { $0.id == item.id }) ?? 0
-                
+                                
                 barMarkMaker(item: item, progress: viewDelegateModel.progress, orientation: orientation)
                     ._if(useAnnotation) { $0._annotation(value: item.value, font: .caption2, foregroundStyle : .primary) }
                     .foregroundStyle(by: .value(fieldKey.label, item.label))
