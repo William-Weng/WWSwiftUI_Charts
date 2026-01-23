@@ -27,7 +27,7 @@ final class PointChartsData: WWSwiftUI.PointMarkValueProtocol {
     }
 }
 
-struct SwiftUIView3: View {
+struct PointMarkViewDemo: View {
         
     @StateObject private var viewModel = WWSwiftUI.PointMarkViewModel<PointChartsData>()
     
@@ -51,5 +51,5 @@ struct SwiftUIView3: View {
 }
 
 #Preview {
-    SwiftUIView3()
+    PointMarkViewDemo()
 }

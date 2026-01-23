@@ -23,7 +23,7 @@ final class BarChartsData: WWSwiftUI.BarMarkValueProtocol {
     }
 }
 
-struct SwiftUIView: View {
+struct BarMarkViewDemo: View {
     
     @StateObject private var viewModel = WWSwiftUI.BarMarkViewModel<BarChartsData>()
     
@@ -49,6 +49,6 @@ struct SwiftUIView: View {
 }
 
 #Preview {
-    SwiftUIView()
+    BarMarkViewDemo()
 }
 

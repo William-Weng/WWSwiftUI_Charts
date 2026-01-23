@@ -37,7 +37,7 @@ final class LineChartsData: WWSwiftUI.LineMarkDataProtocol {
     }
 }
 
-struct SwiftUIView2: View {
+struct LineMarkViewDemo: View {
     
     @State var taipeiData: [LineChartsValue] = []
     @State var hkData: [LineChartsValue] = []
@@ -79,5 +79,5 @@ struct SwiftUIView2: View {
 }
 
 #Preview {
-    SwiftUIView2()
+    LineMarkViewDemo()
 }
